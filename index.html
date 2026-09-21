@@ -1,25 +1,1131 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>СР-426 — личное расписание</title>
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>СР-426 — расписание</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f5f7fb;color:#172033}header{background:#111827;color:#fff;padding:20px 16px;position:sticky;top:0;z-index:5}h1{margin:0;font-size:23px}.sub{opacity:.7;font-size:13px}nav{display:flex;gap:7px;margin-top:14px;overflow:auto}nav button,.week button{border:0;border-radius:10px;padding:9px 12px;background:#293548;color:#fff;font-weight:700}nav button.on{background:#fff;color:#111827}main{max-width:900px;margin:auto;padding:16px 13px 70px}.panel{display:none}.panel.on{display:block}.top{display:flex;justify-content:space-between;align-items:center;gap:8px}.day{margin:18px 0}.day h3{color:#667085;font-size:15px}.card,.info{background:#fff;border:1px solid #e5e9f0;border-radius:15px;padding:13px;margin:8px 0;box-shadow:0 2px 8px #00000008}.time{font-weight:800;font-size:14px}.subj{font-size:16px;font-weight:750;margin:4px 0}.meta,.muted{font-size:12px;color:#667085}.hw{border-top:1px solid #edf0f4;margin-top:10px;padding-top:9px;font-size:13px}.hwtext{white-space:pre-wrap;margin:5px 0}.add{margin-top:7px;border:1px solid #d7dce5;background:#fff;border-radius:9px;padding:7px 10px;font-weight:650}.empty{padding:17px;background:#fff;border:1px dashed #d6dbe4;border-radius:14px;color:#7a8495}.modal,.login{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal.show,.login.show{display:flex}.box{background:#fff;border-radius:18px;padding:19px;width:min(520px,100%)}textarea,input{width:100%;padding:12px;border:1px solid #d8dde7;border-radius:11px;font:inherit}textarea{min-height:150px;resize:vertical}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}.actions button,.login button{padding:10px 14px;border-radius:10px;border:1px solid #d7dce5;background:#fff}.save,.login button{background:#111827!important;color:#fff;border-color:#111827!important}.err{color:#b42318;font-size:13px;height:20px}
-</style></head><body>
-<div id="login" class="login show"><div class="box"><h2>Личное расписание СР-426</h2><p class="muted">Доступ по паролю.</p><input id="pw" type="password" placeholder="Пароль"><div id="err" class="err"></div><button onclick="login()">Войти</button></div></div>
-<header><h1>СР-426 — Личное расписание</h1><div class="sub">Расписание + домашние задания</div><nav><button class="tab on" data-id="today">Сегодня</button><button class="tab" data-id="week">Неделя</button><button class="tab" data-id="hw">Д/З</button><button class="tab" data-id="about">О сайте</button></nav></header>
-<main><section id="today" class="panel on"></section><section id="week" class="panel"></section><section id="hw" class="panel"></section><section id="about" class="panel"><div class="info"><h2>Отдельный сайт</h2><p>Этот сайт самостоятельный и не изменяет сайт alsu41200-sketch.</p><p>Домашние задания сохраняются в браузере на этом устройстве.</p></div></section></main>
-<div id="modal" class="modal"><div class="box"><h3 id="mt"></h3><textarea id="inp" placeholder="Домашнее задание..."></textarea><div class="actions"><button onclick="closeM()">Отмена</button><button class="save" onclick="save()">Сохранить</button></div></div></div>
+*{box-sizing:border-box}
+
+html{
+  background:#f5f7fb;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+
+/* HEADER */
+
+header{
+  background:linear-gradient(135deg,#18212f,#26364a);
+  color:#fff;
+  padding:22px 16px 14px;
+  box-shadow:0 2px 14px #17203322;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+header h1{
+  margin:0;
+  text-align:center;
+  font-size:26px;
+  line-height:1.2;
+}
+
+.sub{
+  text-align:center;
+  margin-top:5px;
+  color:#bfc9d7;
+  font-size:14px;
+}
+
+nav{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:18px auto 0;
+  max-width:650px;
+  overflow-x:auto;
+}
+
+nav button{
+  flex:1;
+  border:1px solid #ffffff22;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#ffffff10;
+  color:#dce3ec;
+  font-weight:700;
+  font-size:14px;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:.15s;
+}
+
+nav button:hover{
+  background:#ffffff1c;
+}
+
+nav button.on{
+  background:#fff;
+  color:#1b2737;
+}
+
+/* MAIN */
+
+main{
+  max-width:760px;
+  margin:auto;
+  padding:12px 12px 70px;
+}
+
+.panel{
+  display:none;
+}
+
+.panel.on{
+  display:block;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.top h2{
+  font-size:20px;
+  margin:10px 2px;
+}
+
+.day{
+  margin:17px 0;
+}
+
+.day h3{
+  margin:0 2px 8px;
+  color:#687486;
+  font-size:14px;
+  font-weight:650;
+}
+
+/* LESSON CARD */
+
+.card,
+.info{
+  background:#fff;
+  border:1px solid #e3e7ee;
+  border-radius:13px;
+  padding:13px 14px;
+  margin:8px 0;
+  box-shadow:0 2px 9px #1822300b;
+}
+
+.time{
+  font-size:13px;
+  font-weight:800;
+  color:#657184;
+}
+
+.subj{
+  font-size:16px;
+  font-weight:750;
+  line-height:1.25;
+  margin:4px 0;
+}
+
+.meta{
+  font-size:12px;
+  color:#758092;
+}
+
+.empty{
+  padding:16px;
+  background:#fff;
+  border:1px dashed #d4dae3;
+  border-radius:13px;
+  color:#7a8493;
+  text-align:center;
+}
+
+/* HOMEWORK */
+
+.hw{
+  border-top:1px solid #edf0f4;
+  margin-top:10px;
+  padding-top:9px;
+  font-size:13px;
+}
+
+.hwtext{
+  white-space:pre-wrap;
+  margin:6px 0;
+}
+
+.add{
+  margin-top:7px;
+  border:1px solid #d8dee7;
+  background:#f8f9fb;
+  color:#263345;
+  border-radius:9px;
+  padding:7px 10px;
+  font-weight:650;
+  cursor:pointer;
+}
+
+.add:hover{
+  background:#eef1f5;
+}
+
+/* WEEK BUTTONS */
+
+.week{
+  display:flex;
+  gap:5px;
+}
+
+.week button{
+  border:1px solid #d8dee7;
+  background:#fff;
+  color:#263345;
+  border-radius:9px;
+  padding:6px 10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ABOUT */
+
+.info{
+  padding:17px;
+}
+
+.info h2{
+  margin-top:0;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:20;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.box{
+  background:#fff;
+  border-radius:17px;
+  padding:19px;
+  width:min(520px,100%);
+  box-shadow:0 14px 40px #0003;
+}
+
+.box h3{
+  margin-top:0;
+}
+
+textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #d8dde7;
+  border-radius:11px;
+  font:inherit;
+  min-height:150px;
+  resize:vertical;
+}
+
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:10px;
+}
+
+.actions button{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #d7dce5;
+  background:#fff;
+  cursor:pointer;
+}
+
+.save{
+  background:#1d2a3a!important;
+  color:#fff;
+  border-color:#1d2a3a!important;
+}
+
+/* MOBILE */
+
+@media(max-width:520px){
+
+  header h1{
+    font-size:23px;
+  }
+
+  nav button{
+    font-size:13px;
+    padding:9px 6px;
+  }
+
+  main{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .top{
+    align-items:flex-start;
+  }
+
+  .top h2{
+    font-size:19px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h1>СР-426 — Расписание</h1>
+
+  <div class="sub">
+    Расписание + домашние задания
+  </div>
+
+  <nav>
+    <button class="tab on" data-id="today">
+      Сегодня
+    </button>
+
+    <button class="tab" data-id="week">
+      Неделя
+    </button>
+
+    <button class="tab" data-id="hw">
+      Д/З
+    </button>
+
+    <button class="tab" data-id="about">
+      О сайте
+    </button>
+  </nav>
+
+</header>
+
+<main>
+
+  <section id="today" class="panel on"></section>
+
+  <section id="week" class="panel"></section>
+
+  <section id="hw" class="panel"></section>
+
+  <section id="about" class="panel">
+
+    <div class="info">
+
+      <h2>СР-426</h2>
+
+      <p>
+        Личное расписание группы СР-426.
+      </p>
+
+      <p>
+        Здесь отображается расписание занятий
+        для чётной и нечётной недели.
+      </p>
+
+      <p>
+        Домашние задания можно добавлять
+        прямо из расписания.
+      </p>
+
+      <p>
+        Домашние задания сохраняются
+        в браузере на этом устройстве.
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ОКНО ДОМАШНЕГО ЗАДАНИЯ -->
+
+<div id="modal" class="modal">
+
+  <div class="box">
+
+    <h3 id="mt"></h3>
+
+    <textarea
+      id="inp"
+      placeholder="Введите домашнее задание..."
+    ></textarea>
+
+    <div class="actions">
+
+      <button onclick="closeM()">
+        Отмена
+      </button>
+
+      <button
+        class="save"
+        onclick="save()"
+      >
+        Сохранить
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
 <script>
-const S={"odd": {"Пн": [["10:50–12:10", "Технологии презентации рекламного креатива", "Практика", "6411", "Кобозева Д.Л."], ["12:25–13:45", "История России", "Практика", "6401", "Гаврилов А.Ю."], ["17:40–19:00", "Основы маркетинга", "Лекция", "Дистанционно", "Андреева А.Л."]], "Вт": [["09:15–10:35", "Основы теории коммуникации", "Лекция", "Дистанционно", "Королева К.Ю."], ["10:50–12:10", "Технологии самообразования и творческого саморазвития", "Лекция", "Дистанционно", "Хлапотин Ю.Н."], ["16:05–17:25", "Иностранный язык", "Практика", "6402", "Преподаватель кафедры"], ["17:40–19:00", "Теория и история рекламы и связей с общественностью", "Практика", "1815", "Хрусловский В.А."]], "Ср": [["12:25–13:45", "Основы маркетинга", "Практика", "6111-1", "Андреева А.Л."], ["14:25–15:45", "Основы теории коммуникации", "Практика", "3319", "Королева К.Ю."], ["16:05–17:25", "Элективные дисциплины по физической культуре и спорту", "Практика", "Спорт. зал", "Преподаватель кафедры"]], "Чт": [], "Пт": [["14:25–15:45", "Основы российской государственности", "Практика", "6401", "Овечкина А.К."], ["16:05–17:25", "Основы профессионального развития", "Практика", "6304", "Гайтукаева Г.Р."]], "Сб": [["12:25–13:45", "Основы маркетинга", "Лекция", "Дистанционно", "Андреева А.Л."]]}, "even": {"Пн": [], "Вт": [["09:15–10:35", "Технологии презентации рекламного креатива", "Лекция", "Дистанционно", "Кобозева Д.Л."], ["16:05–17:25", "Иностранный язык", "Практика", "6402", "Преподаватель кафедры"], ["17:40–19:00", "Теория и история рекламы и связей с общественностью", "Практика", "1815", "Хрусловский В.А."]], "Ср": [["10:50–12:10", "Технологии самообразования и творческого саморазвития", "Практика", "6302", "Хлапотин Ю.Н."], ["12:25–13:45", "Основы маркетинга", "Практика", "6111-1", "Андреева А.Л."], ["14:25–15:45", "Основы теории коммуникации", "Практика", "3319", "Королева К.Ю."], ["16:05–17:25", "Элективные дисциплины по физической культуре и спорту", "Практика", "Спорт. зал", "Преподаватель кафедры"]], "Чт": [], "Пт": [["09:15–10:35", "История рекламы и связей с общественностью", "Лекция", "Дистанционно", "Хрусловский В.А."], ["10:50–12:10", "Основы профессионального развития", "Лекция", "Дистанционно", "Гайтукаева Г.Р."], ["14:25–15:45", "Основы российской государственности", "Практика", "6401", "Овечкина А.К."], ["16:05–17:25", "Основы профессионального развития", "Практика", "6304", "Гайтукаева Г.Р."]], "Сб": []}};const days=["Пн","Вт","Ср","Чт","Пт","Сб"],names={Пн:"Понедельник",Вт:"Вторник",Ср:"Среда",Чт:"Четверг",Пт:"Пятница",Сб:"Суббота"},start=new Date(2026,7,31);let hw=JSON.parse(localStorage.getItem("sr426_hw")||"{}"),edit="";
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function typ(d){let a=new Date(d),b=new Date(start);a.setHours(0,0,0,0);b.setHours(0,0,0,0);return Math.floor((a-b)/604800000)%2?"even":"odd"}
-function key(d,x){return d.toISOString().slice(0,10)+"|"+x[0]+"|"+x[1]}
-function card(d,x){let k=key(d,x),v=hw[k]||"";return `<div class="card"><div class="time">${esc(x[0])}</div><div class="subj">${esc(x[1])}</div><div class="meta">${esc(x[2])} · ${esc(x[3])} · ${esc(x[4])}</div><div class="hw"><b>${v?"✓ Д/З":"Домашнего задания нет"}</b>${v?`<div class="hwtext">${esc(v)}</div>`:""}<br><button class="add" onclick='openM(${JSON.stringify(k)},${JSON.stringify(x[1])})'>${v?"Изменить Д/З":"＋ Добавить Д/З"}</button></div></div>`}
-function day(d){let dn=days[(d.getDay()||7)-1],a=S[typ(d)][dn]||[];return `<div class="day"><h3>${names[dn]} · ${d.toLocaleDateString("ru-RU",{day:"numeric",month:"long"})} · ${typ(d)=="odd"?"нечётная":"чётная"} неделя</h3>${a.length?a.map(x=>card(d,x)).join(""):`<div class="empty">Пар нет</div>`}</div>`}
-function mon(d){let x=new Date(d);let n=x.getDay()||7;x.setDate(x.getDate()-n+1);x.setHours(0,0,0,0);return x}
-function render(){let d=new Date();document.querySelector("#today").innerHTML=`<div class="top"><h2>Сегодня</h2><span class="muted">${d.toLocaleDateString("ru-RU",{weekday:"long",day:"numeric",month:"long"})}</span></div>`+day(d);let m=window.cm||mon(d),s='<div class="top"><h2>Неделя</h2><div class="week"><button onclick="move(-1)">←</button> <button onclick="move(1)">→</button></div></div>';for(let i=0;i<6;i++){let q=new Date(m);q.setDate(m.getDate()+i);s+=day(q)}document.querySelector("#week").innerHTML=s;window.cm=m;let e=Object.entries(hw).filter(x=>x[1]);document.querySelector("#hw").innerHTML='<h2>Домашние задания</h2>'+(e.length?e.map(([k,v])=>`<div class="card"><div class="meta">${esc(k.split("|")[0])} · ${esc(k.split("|")[1])}</div><div class="subj">${esc(k.split("|")[2])}</div><div class="hwtext">${esc(v)}</div></div>`).join(""):'<div class="empty">Пока нет Д/З.</div>')}
-function move(n){let d=new Date(window.cm);d.setDate(d.getDate()+7*n);window.cm=d;render()}
-function openM(k,t){edit=k;document.querySelector("#mt").textContent="Д/З: "+t;document.querySelector("#inp").value=hw[k]||"";document.querySelector("#modal").classList.add("show")}
-function closeM(){document.querySelector("#modal").classList.remove("show")}
-function save(){let v=document.querySelector("#inp").value.trim();if(v)hw[edit]=v;else delete hw[edit];localStorage.setItem("sr426_hw",JSON.stringify(hw));closeM();render()}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("on"));b.classList.add("on");document.getElementById(b.dataset.id).classList.add("on")})
-async function login(){let b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(document.querySelector("#pw").value));let h=[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");if(h==="0dd9961d29310820a77c333da65719e07cc6b7a46648858b48cf1118d6394fe7"){sessionStorage.auth="1";document.querySelector("#login").classList.remove("show");render()}else document.querySelector("#err").textContent="Неверный пароль."}
-if(sessionStorage.auth==="1")document.querySelector("#login").classList.remove("show");render();
-</script></body></html>
+
+/* =========================
+   РАСПИСАНИЕ
+========================= */
+
+const S = {
+
+  odd: {
+
+    "Пн": [
+      [
+        "10:50–12:10",
+        "Технологии презентации рекламного креатива",
+        "Практика",
+        "6411",
+        "Кобозева Д.Л."
+      ],
+      [
+        "12:25–13:45",
+        "История России",
+        "Практика",
+        "6401",
+        "Гаврилов А.Ю."
+      ],
+      [
+        "17:40–19:00",
+        "Основы маркетинга",
+        "Лекция",
+        "Дистанционно",
+        "Андреева А.Л."
+      ]
+    ],
+
+    "Вт": [
+      [
+        "09:15–10:35",
+        "Основы теории коммуникации",
+        "Лекция",
+        "Дистанционно",
+        "Королева К.Ю."
+      ],
+      [
+        "10:50–12:10",
+        "Технологии самообразования и творческого саморазвития",
+        "Лекция",
+        "Дистанционно",
+        "Хлапотин Ю.Н."
+      ],
+      [
+        "16:05–17:25",
+        "Иностранный язык",
+        "Практика",
+        "6402",
+        "Преподаватель кафедры"
+      ],
+      [
+        "17:40–19:00",
+        "Теория и история рекламы и связей с общественностью",
+        "Практика",
+        "1815",
+        "Хрусловский В.А."
+      ]
+    ],
+
+    "Ср": [
+      [
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Практика",
+        "6111-1",
+        "Андреева А.Л."
+      ],
+      [
+        "14:25–15:45",
+        "Основы теории коммуникации",
+        "Практика",
+        "3319",
+        "Королева К.Ю."
+      ],
+      [
+        "16:05–17:25",
+        "Элективные дисциплины по физической культуре и спорту",
+        "Практика",
+        "Спорт. зал",
+        "Преподаватель кафедры"
+      ]
+    ],
+
+    "Чт": [],
+
+    "Пт": [
+      [
+        "14:25–15:45",
+        "Основы российской государственности",
+        "Практика",
+        "6401",
+        "Овечкина А.К."
+      ],
+      [
+        "16:05–17:25",
+        "Основы профессионального развития",
+        "Практика",
+        "6304",
+        "Гайтукаева Г.Р."
+      ]
+    ],
+
+    "Сб": [
+      [
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Лекция",
+        "Дистанционно",
+        "Андреева А.Л."
+      ]
+    ]
+
+  },
+
+  even: {
+
+    "Пн": [],
+
+    "Вт": [
+      [
+        "09:15–10:35",
+        "Технологии презентации рекламного креатива",
+        "Лекция",
+        "Дистанционно",
+        "Кобозева Д.Л."
+      ],
+      [
+        "16:05–17:25",
+        "Иностранный язык",
+        "Практика",
+        "6402",
+        "Преподаватель кафедры"
+      ],
+      [
+        "17:40–19:00",
+        "Теория и история рекламы и связей с общественностью",
+        "Практика",
+        "1815",
+        "Хрусловский В.А."
+      ]
+    ],
+
+    "Ср": [
+      [
+        "10:50–12:10",
+        "Технологии самообразования и творческого саморазвития",
+        "Практика",
+        "6302",
+        "Хлапотин Ю.Н."
+      ],
+      [
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Практика",
+        "6111-1",
+        "Андреева А.Л."
+      ],
+      [
+        "14:25–15:45",
+        "Основы теории коммуникации",
+        "Практика",
+        "3319",
+        "Королева К.Ю."
+      ],
+      [
+        "16:05–17:25",
+        "Элективные дисциплины по физической культуре и спорту",
+        "Практика",
+        "Спорт. зал",
+        "Преподаватель кафедры"
+      ]
+    ],
+
+    "Чт": [],
+
+    "Пт": [
+      [
+        "09:15–10:35",
+        "История рекламы и связей с общественностью",
+        "Лекция",
+        "Дистанционно",
+        "Хрусловский В.А."
+      ],
+      [
+        "10:50–12:10",
+        "Основы профессионального развития",
+        "Лекция",
+        "Дистанционно",
+        "Гайтукаева Г.Р."
+      ],
+      [
+        "14:25–15:45",
+        "Основы российской государственности",
+        "Практика",
+        "6401",
+        "Овечкина А.К."
+      ],
+      [
+        "16:05–17:25",
+        "Основы профессионального развития",
+        "Практика",
+        "6304",
+        "Гайтукаева Г.Р."
+      ]
+    ],
+
+    "Сб": []
+
+  }
+
+};
+
+
+/* =========================
+   НАСТРОЙКИ
+========================= */
+
+const days = [
+  "Пн",
+  "Вт",
+  "Ср",
+  "Чт",
+  "Пт",
+  "Сб"
+];
+
+const names = {
+  Пн:"Понедельник",
+  Вт:"Вторник",
+  Ср:"Среда",
+  Чт:"Четверг",
+  Пт:"Пятница",
+  Сб:"Суббота"
+};
+
+
+/*
+  31 августа 2026 —
+  начало первой недели.
+*/
+
+const start = new Date(2026,7,31);
+
+
+/* =========================
+   ДОМАШНИЕ ЗАДАНИЯ
+========================= */
+
+let hw =
+  JSON.parse(
+    localStorage.getItem("sr426_hw") || "{}"
+  );
+
+let edit = "";
+
+
+/* =========================
+   БЕЗОПАСНЫЙ ТЕКСТ
+========================= */
+
+function esc(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    }[c])
+  );
+
+}
+
+
+/* =========================
+   ЧЁТНАЯ / НЕЧЁТНАЯ
+========================= */
+
+function typ(d){
+
+  let a = new Date(d);
+  let b = new Date(start);
+
+  a.setHours(0,0,0,0);
+  b.setHours(0,0,0,0);
+
+  return Math.floor(
+    (a-b)/604800000
+  ) % 2
+    ? "even"
+    : "odd";
+
+}
+
+
+/* =========================
+   КЛЮЧ Д/З
+========================= */
+
+function key(d,x){
+
+  return (
+    d.toISOString().slice(0,10)
+    + "|"
+    + x[0]
+    + "|"
+    + x[1]
+  );
+
+}
+
+
+/* =========================
+   КАРТОЧКА ПАРЫ
+========================= */
+
+function card(d,x){
+
+  let k = key(d,x);
+  let v = hw[k] || "";
+
+  return `
+
+    <div class="card">
+
+      <div class="time">
+        ${esc(x[0])}
+      </div>
+
+      <div class="subj">
+        ${esc(x[1])}
+      </div>
+
+      <div class="meta">
+        ${esc(x[2])}
+        ·
+        ${esc(x[3])}
+        ·
+        ${esc(x[4])}
+      </div>
+
+      <div class="hw">
+
+        <b>
+          ${v
+            ? "✓ Д/З"
+            : "Домашнего задания нет"
+          }
+        </b>
+
+        ${
+          v
+          ? `<div class="hwtext">
+              ${esc(v)}
+             </div>`
+          : ""
+        }
+
+        <br>
+
+        <button
+          class="add"
+          onclick='openM(
+            ${JSON.stringify(k)},
+            ${JSON.stringify(x[1])}
+          )'
+        >
+          ${
+            v
+            ? "Изменить Д/З"
+            : "＋ Добавить Д/З"
+          }
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   ДЕНЬ
+========================= */
+
+function day(d){
+
+  let dn =
+    days[(d.getDay() || 7)-1];
+
+  let a =
+    S[typ(d)][dn] || [];
+
+  return `
+
+    <div class="day">
+
+      <h3>
+        ${names[dn]}
+        ·
+        ${d.toLocaleDateString(
+          "ru-RU",
+          {
+            day:"numeric",
+            month:"long"
+          }
+        )}
+        ·
+        ${typ(d)=="odd"
+          ? "нечётная"
+          : "чётная"
+        }
+        неделя
+      </h3>
+
+      ${
+        a.length
+        ? a.map(x=>card(d,x)).join("")
+        : `
+          <div class="empty">
+            Пар нет
+          </div>
+        `
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   ПОНЕДЕЛЬНИК НЕДЕЛИ
+========================= */
+
+function mon(d){
+
+  let x = new Date(d);
+
+  let n =
+    x.getDay() || 7;
+
+  x.setDate(
+    x.getDate()-n+1
+  );
+
+  x.setHours(0,0,0,0);
+
+  return x;
+
+}
+
+
+/* =========================
+   РЕНДЕР
+========================= */
+
+function render(){
+
+  let d = new Date();
+
+  document.querySelector("#today").innerHTML = `
+
+    <div class="top">
+
+      <h2>
+        Сегодня
+      </h2>
+
+      <span class="meta">
+        ${d.toLocaleDateString(
+          "ru-RU",
+          {
+            weekday:"long",
+            day:"numeric",
+            month:"long"
+          }
+        )}
+      </span>
+
+    </div>
+
+    ${day(d)}
+
+  `;
+
+
+  let m =
+    window.cm || mon(d);
+
+  let s = `
+
+    <div class="top">
+
+      <h2>
+        Неделя
+      </h2>
+
+      <div class="week">
+
+        <button onclick="move(-1)">
+          ←
+        </button>
+
+        <button onclick="move(1)">
+          →
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  for(let i=0;i<6;i++){
+
+    let q = new Date(m);
+
+    q.setDate(
+      m.getDate()+i
+    );
+
+    s += day(q);
+
+  }
+
+
+  document.querySelector("#week").innerHTML =
+    s;
+
+  window.cm = m;
+
+
+  let e =
+    Object.entries(hw)
+      .filter(x=>x[1]);
+
+
+  document.querySelector("#hw").innerHTML = `
+
+    <h2>
+      Домашние задания
+    </h2>
+
+    ${
+      e.length
+
+      ? e.map(
+          ([k,v]) => `
+
+            <div class="card">
+
+              <div class="meta">
+                ${esc(k.split("|")[0])}
+                ·
+                ${esc(k.split("|")[1])}
+              </div>
+
+              <div class="subj">
+                ${esc(k.split("|")[2])}
+              </div>
+
+              <div class="hwtext">
+                ${esc(v)}
+              </div>
+
+            </div>
+
+          `
+        ).join("")
+
+      : `
+
+        <div class="empty">
+          Пока нет Д/З.
+        </div>
+
+      `
+    }
+
+  `;
+
+}
+
+
+/* =========================
+   ПЕРЕКЛЮЧЕНИЕ НЕДЕЛИ
+========================= */
+
+function move(n){
+
+  let d =
+    new Date(window.cm);
+
+  d.setDate(
+    d.getDate()+7*n
+  );
+
+  window.cm = d;
+
+  render();
+
+}
+
+
+/* =========================
+   ДОБАВИТЬ Д/З
+========================= */
+
+function openM(k,t){
+
+  edit = k;
+
+  document.querySelector("#mt")
+    .textContent =
+    "Д/З: " + t;
+
+  document.querySelector("#inp")
+    .value =
+    hw[k] || "";
+
+  document.querySelector("#modal")
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   ЗАКРЫТЬ ОКНО
+========================= */
+
+function closeM(){
+
+  document.querySelector("#modal")
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   СОХРАНИТЬ Д/З
+========================= */
+
+function save(){
+
+  let v =
+    document.querySelector("#inp")
+      .value
+      .trim();
+
+  if(v){
+
+    hw[edit] = v;
+
+  }else{
+
+    delete hw[edit];
+
+  }
+
+  localStorage.setItem(
+    "sr426_hw",
+    JSON.stringify(hw)
+  );
+
+  closeM();
+
+  render();
+
+}
+
+
+/* =========================
+   ВКЛАДКИ
+========================= */
+
+document
+  .querySelectorAll(".tab")
+  .forEach(b => {
+
+    b.onclick = () => {
+
+      document
+        .querySelectorAll(".tab")
+        .forEach(x =>
+          x.classList.remove("on")
+        );
+
+      document
+        .querySelectorAll(".panel")
+        .forEach(x =>
+          x.classList.remove("on")
+        );
+
+      b.classList.add("on");
+
+      document
+        .getElementById(b.dataset.id)
+        .classList.add("on");
+
+    };
+
+  });
+
+
+/* =========================
+   ЗАПУСК
+========================= */
+
+render();
+
+</script>
+
+</body>
+</html>
