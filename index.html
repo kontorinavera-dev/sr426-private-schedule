@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <title>СР-426</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 :root{
   --bg:#f5f7fb;
-  --card:#fff;
+  --card:#ffffff;
   --text:#111827;
   --muted:#68748b;
   --blue:#1677ff;
   --soft:#e9edf5;
   --line:#e0e4eb;
+  --hw:#f1f6ff;
 }
 
 html,body{
@@ -23,30 +28,32 @@ html,body{
   min-height:100%;
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
 }
 
 body{
-  padding-bottom:112px
+  padding-bottom:112px;
 }
 
 button{
   font:inherit;
   border:0;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .app{
   max-width:820px;
   margin:0 auto;
-  padding:42px 36px 28px
+  padding:42px 36px 28px;
 }
+
+/* Шапка */
 
 .top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:28px
+  margin-bottom:28px;
 }
 
 .title h1{
@@ -54,14 +61,14 @@ button{
   font-size:54px;
   line-height:1;
   font-weight:750;
-  letter-spacing:-2px
+  letter-spacing:-2px;
 }
 
 .title p{
   margin:15px 0 0;
   font-size:29px;
   color:var(--muted);
-  letter-spacing:-.5px
+  letter-spacing:-.5px;
 }
 
 .info{
@@ -75,41 +82,45 @@ button{
   justify-content:center;
   font-size:35px;
   font-weight:700;
-  box-shadow:0 8px 25px rgba(20,35,60,.06)
+  box-shadow:0 8px 25px rgba(20,35,60,.06);
 }
+
+/* Заголовки */
 
 .section-title{
   font-size:28px;
   font-weight:750;
-  margin:25px 0 16px
+  margin:25px 0 16px;
 }
+
+/* Карточка занятия */
 
 .card{
   background:var(--card);
   border-radius:27px;
   padding:23px;
   margin-bottom:15px;
-  box-shadow:0 7px 25px rgba(25,40,65,.06)
+  box-shadow:0 7px 25px rgba(25,40,65,.06);
 }
 
 .lesson-time{
   font-size:18px;
   color:var(--blue);
   font-weight:700;
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 .lesson-name{
   font-size:23px;
   line-height:1.22;
   font-weight:700;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .lesson-meta{
   color:var(--muted);
   font-size:16px;
-  line-height:1.45
+  line-height:1.45;
 }
 
 .type{
@@ -118,8 +129,49 @@ button{
   padding:5px 10px;
   border-radius:10px;
   margin-right:6px;
-  margin-bottom:4px
+  margin-bottom:4px;
 }
+
+/* Домашнее задание внутри занятия */
+
+.lesson-homework{
+  margin-top:17px;
+  padding:15px 16px;
+  border-radius:18px;
+  background:var(--hw);
+  border:1px solid #dceaff;
+}
+
+.hw-label{
+  color:var(--blue);
+  font-size:14px;
+  font-weight:750;
+  margin-bottom:7px;
+}
+
+.hw-text{
+  font-size:16px;
+  line-height:1.45;
+  color:#344054;
+  white-space:pre-wrap;
+}
+
+.hw-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.hw-actions button{
+  background:#fff;
+  color:var(--blue);
+  border:1px solid #d9e6fb;
+  border-radius:10px;
+  padding:7px 10px;
+  font-size:13px;
+}
+
+/* Пусто */
 
 .empty{
   background:#fff;
@@ -128,14 +180,16 @@ button{
   text-align:center;
   color:var(--muted);
   font-size:18px;
-  box-shadow:0 7px 25px rgba(25,40,65,.05)
+  box-shadow:0 7px 25px rgba(25,40,65,.05);
 }
+
+/* Неделя */
 
 .week-head{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:16px
+  margin-bottom:16px;
 }
 
 .week-head button{
@@ -145,47 +199,49 @@ button{
   background:#fff;
   color:var(--blue);
   font-size:25px;
-  box-shadow:0 5px 18px rgba(25,40,65,.06)
+  box-shadow:0 5px 18px rgba(25,40,65,.06);
 }
 
 .week-title{
   text-align:center;
   font-size:21px;
-  font-weight:750
+  font-weight:750;
 }
 
 .day-title{
   font-size:23px;
   font-weight:750;
-  margin:25px 0 12px
+  margin:25px 0 12px;
 }
+
+/* Д/З */
 
 .homework-item{
   background:#fff;
   border-radius:23px;
   padding:20px;
   margin-bottom:13px;
-  box-shadow:0 7px 25px rgba(25,40,65,.05)
+  box-shadow:0 7px 25px rgba(25,40,65,.05);
 }
 
 .homework-date{
   font-size:14px;
   color:var(--blue);
   font-weight:700;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 
 .homework-subject{
   font-size:19px;
   font-weight:700;
-  margin-bottom:7px
+  margin-bottom:7px;
 }
 
 .homework-text{
   font-size:16px;
   line-height:1.45;
   color:var(--muted);
-  white-space:pre-wrap
+  white-space:pre-wrap;
 }
 
 .add-button{
@@ -196,8 +252,10 @@ button{
   border-radius:20px;
   font-size:18px;
   font-weight:700;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
+
+/* О сайте */
 
 .about-card{
   background:#fff;
@@ -205,14 +263,16 @@ button{
   padding:26px;
   box-shadow:0 7px 25px rgba(25,40,65,.05);
   line-height:1.55;
-  color:#374151
+  color:#374151;
 }
 
 .about-card h2{
   margin:0 0 12px;
   font-size:25px;
-  color:var(--text)
+  color:var(--text);
 }
+
+/* Нижнее меню */
 
 .nav{
   position:fixed;
@@ -229,7 +289,7 @@ button{
   grid-template-columns:repeat(4,1fr);
   gap:6px;
   box-shadow:0 10px 35px rgba(25,40,65,.13);
-  z-index:50
+  z-index:50;
 }
 
 .nav button{
@@ -238,20 +298,22 @@ button{
   padding:11px 5px 10px;
   border-radius:19px;
   font-size:13px;
-  font-weight:650
+  font-weight:650;
 }
 
 .nav button.active{
   background:#eaf2ff;
-  color:var(--blue)
+  color:var(--blue);
 }
 
 .nav-icon{
   display:block;
   font-size:23px;
   line-height:24px;
-  margin-bottom:4px
+  margin-bottom:4px;
 }
+
+/* Окно добавления Д/З */
 
 .modal{
   display:none;
@@ -262,11 +324,11 @@ button{
   -webkit-backdrop-filter:blur(5px);
   z-index:100;
   align-items:flex-end;
-  justify-content:center
+  justify-content:center;
 }
 
 .modal.show{
-  display:flex
+  display:flex;
 }
 
 .modal-box{
@@ -274,12 +336,12 @@ button{
   background:#fff;
   border-radius:30px 30px 0 0;
   padding:27px;
-  padding-bottom:calc(27px + env(safe-area-inset-bottom))
+  padding-bottom:calc(27px + env(safe-area-inset-bottom));
 }
 
 .modal-box h2{
   margin:0 0 18px;
-  font-size:25px
+  font-size:25px;
 }
 
 .input,
@@ -291,134 +353,172 @@ button{
   font:inherit;
   outline:none;
   background:#f8f9fc;
-  margin-bottom:12px
+  margin-bottom:12px;
 }
 
 .textarea{
   min-height:130px;
-  resize:vertical
+  resize:vertical;
 }
 
 .modal-actions{
   display:flex;
-  gap:10px
+  gap:10px;
 }
 
 .modal-actions button{
   flex:1;
   padding:15px;
   border-radius:17px;
-  font-weight:700
+  font-weight:700;
 }
 
 .cancel{
   background:var(--soft);
-  color:#4b5563
+  color:#4b5563;
 }
 
 .save{
   background:var(--blue);
-  color:#fff
+  color:#fff;
 }
 
 .hidden{
-  display:none!important
+  display:none!important;
 }
 
+
+/* Телефон */
+
 @media(max-width:600px){
+
   .app{
-    padding:32px 16px 25px
+    padding:32px 16px 25px;
   }
 
   .title h1{
-    font-size:45px
+    font-size:45px;
   }
 
   .title p{
     font-size:22px;
-    margin-top:10px
+    margin-top:10px;
   }
 
   .info{
     width:64px;
     height:64px;
     border-radius:22px;
-    font-size:27px
+    font-size:27px;
   }
 
   .section-title{
-    font-size:25px
+    font-size:25px;
   }
 
   .lesson-name{
-    font-size:20px
+    font-size:20px;
   }
 
   .card{
     padding:20px;
-    border-radius:23px
+    border-radius:23px;
   }
 
   .nav{
     bottom:10px;
     width:calc(100% - 18px);
-    border-radius:24px
+    border-radius:24px;
   }
 
   .nav button{
-    font-size:11px
+    font-size:11px;
   }
 
   .nav-icon{
-    font-size:21px
+    font-size:21px;
   }
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
   <div class="top">
+
     <div class="title">
+
       <h1>СР-426</h1>
+
       <p>Расписание занятий</p>
+
     </div>
 
-    <button class="info" onclick="showSection('about')">i</button>
+    <button class="info" onclick="showSection('about')">
+      i
+    </button>
+
   </div>
 
   <main id="content"></main>
 
 </div>
 
+
+<!-- Нижняя навигация -->
+
 <nav class="nav">
+
   <button id="nav-today" onclick="showSection('today')">
+
     <span class="nav-icon">☀️</span>
+
     Сегодня
+
   </button>
+
 
   <button id="nav-week" onclick="showSection('week')">
+
     <span class="nav-icon">▦</span>
+
     Неделя
+
   </button>
+
 
   <button id="nav-homework" onclick="showSection('homework')">
+
     <span class="nav-icon">✓</span>
+
     Д/З
+
   </button>
 
+
   <button id="nav-about" onclick="showSection('about')">
+
     <span class="nav-icon">ⓘ</span>
+
     О сайте
+
   </button>
+
 </nav>
 
 
+<!-- Добавление домашнего задания -->
+
 <div class="modal" id="homeworkModal">
+
   <div class="modal-box">
+
     <h2>Добавить домашнее задание</h2>
+
 
     <input
       class="input"
@@ -426,11 +526,13 @@ button{
       placeholder="Предмет"
     >
 
+
     <input
       class="input"
       id="hwDate"
       type="date"
     >
+
 
     <textarea
       class="textarea"
@@ -438,103 +540,346 @@ button{
       placeholder="Что нужно сделать?"
     ></textarea>
 
+
     <div class="modal-actions">
-      <button class="cancel" onclick="closeModal()">Отмена</button>
-      <button class="save" onclick="saveHomework()">Сохранить</button>
+
+      <button
+        class="cancel"
+        onclick="closeModal()"
+      >
+        Отмена
+      </button>
+
+
+      <button
+        class="save"
+        onclick="saveHomework()"
+      >
+        Сохранить
+      </button>
+
     </div>
+
   </div>
+
 </div>
 
 
 <script>
 
+
+/* =====================================================
+   РАСПИСАНИЕ
+===================================================== */
+
 const schedule = {
 
   odd: {
+
     "Пн": [
-      ["10:50–12:10","Технологии презентации рекламного креатива","Практика","6411","Кобозева Д.Л."],
-      ["12:25–13:45","История России","Практика","6401","Гаврилов А.Ю."],
-      ["17:40–19:00","Основы маркетинга","Лекция","Дистанционно","Андреева А.Л."]
+
+      [
+        "10:50–12:10",
+        "Технологии презентации рекламного креатива",
+        "Практика",
+        "6411",
+        "Кобозева Д.Л."
+      ],
+
+      [
+        "12:25–13:45",
+        "История России",
+        "Практика",
+        "6401",
+        "Гаврилов А.Ю."
+      ],
+
+      [
+        "17:40–19:00",
+        "Основы маркетинга",
+        "Лекция",
+        "Дистанционно",
+        "Андреева А.Л."
+      ]
+
     ],
+
 
     "Вт": [
-      ["09:15–10:35","Основы теории коммуникации","Лекция","Дистанционно","Королева К.Ю."],
-      ["10:50–12:10","Технологии самообразования и творческого саморазвития","Лекция","Дистанционно","Хлапотин Ю.Н."],
-      ["16:05–17:25","Иностранный язык","Практика","6402","Преподаватель кафедры"],
-      ["17:40–19:00","Теория и история рекламы и связей с общественностью","Практика","1815","Хрусловский В.А."]
+
+      [
+        "09:15–10:35",
+        "Основы теории коммуникации",
+        "Лекция",
+        "Дистанционно",
+        "Королева К.Ю."
+      ],
+
+      [
+        "10:50–12:10",
+        "Технологии самообразования и творческого саморазвития",
+        "Лекция",
+        "Дистанционно",
+        "Хлапотин Ю.Н."
+      ],
+
+      [
+        "16:05–17:25",
+        "Иностранный язык",
+        "Практика",
+        "6402",
+        "Преподаватель кафедры"
+      ],
+
+      [
+        "17:40–19:00",
+        "Теория и история рекламы и связей с общественностью",
+        "Практика",
+        "1815",
+        "Хрусловский В.А."
+      ]
+
     ],
 
+
     "Ср": [
-      ["12:25–13:45","Основы маркетинга","Практика","6111-1","Андреева А.Л."],
-      ["14:25–15:45","Основы теории коммуникации","Практика","3319","Королева К.Ю."],
-      ["16:05–17:25","Элективные дисциплины по физической культуре и спорту","Практика","Спорт. зал","Преподаватель кафедры"]
+
+      [
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Практика",
+        "6111-1",
+        "Андреева А.Л."
+      ],
+
+      [
+        "14:25–15:45",
+        "Основы теории коммуникации",
+        "Практика",
+        "3319",
+        "Королева К.Ю."
+      ],
+
+      [
+        "16:05–17:25",
+        "Элективные дисциплины по физической культуре и спорту",
+        "Практика",
+        "Спорт. зал",
+        "Преподаватель кафедры"
+      ]
+
     ],
+
 
     "Чт": [],
 
+
     "Пт": [
-      ["14:25–15:45","Основы российской государственности","Практика","6401","Овечкина А.К."],
-      ["16:05–17:25","Основы профессионального развития","Практика","6304","Гайтукаева Г.Р."]
+
+      [
+        "14:25–15:45",
+        "Основы российской государственности",
+        "Практика",
+        "6401",
+        "Овечкина А.К."
+      ],
+
+      [
+        "16:05–17:25",
+        "Основы профессионального развития",
+        "Практика",
+        "6304",
+        "Гайтукаева Г.Р."
+      ]
+
     ],
+
 
     "Сб": [
-      ["12:25–13:45","Основы маркетинга","Лекция","Дистанционно","Андреева А.Л."]
+
+      [
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Лекция",
+        "Дистанционно",
+        "Андреева А.Л."
+      ]
+
     ]
+
   },
 
+
   even: {
+
     "Пн": [],
 
+
     "Вт": [
-      ["09:15–10:35","Технологии презентации рекламного креатива","Лекция","Дистанционно","Кобозева Д.Л."],
-      ["16:05–17:25","Иностранный язык","Практика","6402","Преподаватель кафедры"],
-      ["17:40–19:00","Теория и история рекламы и связей с общественностью","Практика","1815","Хрусловский В.А."]
+
+      [
+        "09:15–10:35",
+        "Технологии презентации рекламного креатива",
+        "Лекция",
+        "Дистанционно",
+        "Кобозева Д.Л."
+      ],
+
+      [
+        "16:05–17:25",
+        "Иностранный язык",
+        "Практика",
+        "6402",
+        "Преподаватель кафедры"
+      ],
+
+      [
+        "17:40–19:00",
+        "Теория и история рекламы и связей с общественностью",
+        "Практика",
+        "1815",
+        "Хрусловский В.А."
+      ]
+
     ],
 
+
     "Ср": [
-      ["10:50–12:10","Технологии самообразования и творческого саморазвития","Практика","6302","Хлапотин Ю.Н."],
-      ["12:25–13:45","Основы маркетинга","Практика","6111-1","Андреева А.Л."],
-      ["14:25–15:45","Основы теории коммуникации","Практика","3319","Королева К.Ю."],
-      ["16:05–17:25","Элективные дисциплины по физической культуре и спорту","Практика","Спорт. зал","Преподаватель кафедры"]
+
+      [
+        "10:50–12:10",
+        "Технологии самообразования и творческого саморазвития",
+        "Практика",
+        "6302",
+        "Хлапотин Ю.Н."
+      ],
+
+      [
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Практика",
+        "6111-1",
+        "Андреева А.Л."
+      ],
+
+      [
+        "14:25–15:45",
+        "Основы теории коммуникации",
+        "Практика",
+        "3319",
+        "Королева К.Ю."
+      ],
+
+      [
+        "16:05–17:25",
+        "Элективные дисциплины по физической культуре и спорту",
+        "Практика",
+        "Спорт. зал",
+        "Преподаватель кафедры"
+      ]
+
     ],
+
 
     "Чт": [],
 
+
     "Пт": [
-      ["09:15–10:35","История рекламы и связей с общественностью","Лекция","Дистанционно","Хрусловский В.А."],
-      ["10:50–12:10","Основы профессионального развития","Лекция","Дистанционно","Гайтукаева Г.Р."],
-      ["14:25–15:45","Основы российской государственности","Практика","6401","Овечкина А.К."],
-      ["16:05–17:25","Основы профессионального развития","Практика","6304","Гайтукаева Г.Р."]
+
+      [
+        "09:15–10:35",
+        "История рекламы и связей с общественностью",
+        "Лекция",
+        "Дистанционно",
+        "Хрусловский В.А."
+      ],
+
+      [
+        "10:50–12:10",
+        "Основы профессионального развития",
+        "Лекция",
+        "Дистанционно",
+        "Гайтукаева Г.Р."
+      ],
+
+      [
+        "14:25–15:45",
+        "Основы российской государственности",
+        "Практика",
+        "6401",
+        "Овечкина А.К."
+      ],
+
+      [
+        "16:05–17:25",
+        "Основы профессионального развития",
+        "Практика",
+        "6304",
+        "Гайтукаева Г.Р."
+      ]
+
     ],
 
+
     "Сб": []
+
   }
+
 };
 
 
-const days = ["Пн","Вт","Ср","Чт","Пт","Сб"];
+/* =====================================================
+   НАСТРОЙКИ
+===================================================== */
+
+const days = [
+  "Пн",
+  "Вт",
+  "Ср",
+  "Чт",
+  "Пт",
+  "Сб"
+];
 
 let currentSection = "today";
+
 let weekOffset = 0;
 
 
-function getWeekType(date = new Date()) {
+/* =====================================================
+   ОПРЕДЕЛЕНИЕ ЧЁТНОЙ / НЕЧЁТНОЙ НЕДЕЛИ
+===================================================== */
 
-  const start = new Date(2026, 8, 1);
+function getWeekType(date = new Date()){
+
+  const start = new Date(2026,8,1);
+
+  const current =
+    new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
 
   const diff =
     Math.floor(
-      (new Date(date.getFullYear(),date.getMonth(),date.getDate()) - start) /
-      86400000
+      (current - start) / 86400000
     );
 
-  const weekNumber = Math.floor(diff / 7) + 1;
+  const weekNumber =
+    Math.floor(diff / 7) + 1;
 
-  return weekNumber % 2 === 1 ? "odd" : "even";
+  return weekNumber % 2 === 1
+    ? "odd"
+    : "even";
 }
 
 
-function getDayName(date) {
+/* =====================================================
+   ДЕНЬ НЕДЕЛИ
+===================================================== */
+
+function getDayName(date){
 
   const names = [
     "Вс",
@@ -550,17 +895,136 @@ function getDayName(date) {
 }
 
 
-function formatDate(date) {
+/* =====================================================
+   ФОРМАТ ДАТЫ
+===================================================== */
 
-  return String(date.getDate()).padStart(2,"0") + "." +
-         String(date.getMonth()+1).padStart(2,"0") + "." +
-         date.getFullYear();
+function formatDate(date){
+
+  return String(date.getDate()).padStart(2,"0")
+    + "."
+    + String(date.getMonth()+1).padStart(2,"0")
+    + "."
+    + date.getFullYear();
+
 }
 
 
-function lessonCard(lesson) {
+/* =====================================================
+   ДОМАШНИЕ ЗАДАНИЯ
+===================================================== */
+
+function getHomework(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem("sr426_homework") || "[]"
+    );
+
+  }catch(e){
+
+    return [];
+
+  }
+
+}
+
+
+/* =====================================================
+   ЭКРАНИРОВАНИЕ ТЕКСТА
+===================================================== */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   ПОИСК Д/З ДЛЯ ПРЕДМЕТА
+===================================================== */
+
+function findHomework(subject,date){
+
+  const items = getHomework();
+
+  const target =
+    String(date);
+
+  return items.filter(item => {
+
+    return item.subject.trim().toLowerCase()
+      === subject.trim().toLowerCase()
+      &&
+      item.date === target;
+
+  });
+
+}
+
+
+/* =====================================================
+   КАРТОЧКА ЗАНЯТИЯ
+===================================================== */
+
+function lessonCard(lesson,date){
+
+  const homework =
+    findHomework(
+      lesson[1],
+      date
+    );
+
+
+  let homeworkHtml = "";
+
+
+  if(homework.length){
+
+    homeworkHtml = `
+
+      <div class="lesson-homework">
+
+        <div class="hw-label">
+          📝 Домашнее задание
+        </div>
+
+        ${
+          homework.map((item,index) => `
+
+            <div class="hw-text">
+              ${escapeHtml(item.text)}
+            </div>
+
+            <div class="hw-actions">
+
+              <button
+                onclick="deleteHomeworkById('${item.id}')"
+              >
+                Удалить
+              </button>
+
+            </div>
+
+          `).join("")
+        }
+
+      </div>
+
+    `;
+
+  }
+
 
   return `
+
     <div class="card">
 
       <div class="lesson-time">
@@ -568,36 +1032,49 @@ function lessonCard(lesson) {
       </div>
 
       <div class="lesson-name">
-        ${lesson[1]}
+        ${escapeHtml(lesson[1])}
       </div>
 
       <div class="lesson-meta">
 
         <span class="type">
-          ${lesson[2]}
+          ${escapeHtml(lesson[2])}
         </span>
 
-        ${lesson[3]}
+        ${escapeHtml(lesson[3])}
 
         <br>
 
-        ${lesson[4]}
+        ${escapeHtml(lesson[4])}
 
       </div>
 
+      ${homeworkHtml}
+
     </div>
+
   `;
+
 }
 
 
-function renderToday() {
+/* =====================================================
+   СЕГОДНЯ
+===================================================== */
 
-  const today = new Date();
-  const day = getDayName(today);
+function renderToday(){
 
-  if(day === "Вс") {
+  const today =
+    new Date();
+
+  const day =
+    getDayName(today);
+
+
+  if(day === "Вс"){
 
     return `
+
       <div class="section-title">
         Сегодня
       </div>
@@ -606,62 +1083,100 @@ function renderToday() {
         Сегодня воскресенье.<br>
         Занятий нет.
       </div>
+
     `;
+
   }
 
-  const type = getWeekType(today);
-  const lessons = schedule[type][day] || [];
+
+  const type =
+    getWeekType(today);
+
+  const lessons =
+    schedule[type][day] || [];
+
 
   let html = `
+
     <div class="section-title">
       Сегодня · ${formatDate(today)}
     </div>
+
   `;
 
-  if(!lessons.length) {
+
+  if(!lessons.length){
 
     html += `
+
       <div class="empty">
         Сегодня занятий нет.
       </div>
+
     `;
 
-  } else {
+  }else{
 
-    lessons.forEach(l => {
-      html += lessonCard(l);
+    lessons.forEach(lesson => {
+
+      html += lessonCard(
+        lesson,
+        formatDate(today)
+      );
+
     });
 
   }
 
+
   return html;
+
 }
 
 
-function renderWeek() {
+/* =====================================================
+   НЕДЕЛЯ
+===================================================== */
 
-  const base = new Date();
+function renderWeek(){
+
+  const base =
+    new Date();
 
   base.setDate(
     base.getDate() +
     weekOffset * 7
   );
 
-  const monday = new Date(base);
 
-  const day = monday.getDay();
+  const monday =
+    new Date(base);
+
+  const day =
+    monday.getDay();
 
   const diff =
-    day === 0 ? -6 : 1 - day;
+    day === 0
+      ? -6
+      : 1 - day;
+
 
   monday.setDate(
     monday.getDate() + diff
   );
 
-  const type = getWeekType(monday);
 
-  const weekEnd = new Date(monday);
-  weekEnd.setDate(monday.getDate()+5);
+  const type =
+    getWeekType(monday);
+
+
+  const weekEnd =
+    new Date(monday);
+
+  weekEnd.setDate(
+    monday.getDate() + 5
+  );
+
 
   let html = `
 
@@ -683,70 +1198,98 @@ function renderWeek() {
 
     </div>
 
+
     <div class="section-title">
-      ${type === "odd" ? "Нечётная неделя" : "Чётная неделя"}
+      ${
+        type === "odd"
+          ? "Нечётная неделя"
+          : "Чётная неделя"
+      }
     </div>
+
   `;
 
-  days.forEach(d => {
 
-    const lessons = schedule[type][d] || [];
+  days.forEach((d,index) => {
+
+    const lessons =
+      schedule[type][d] || [];
+
+
+    const date =
+      new Date(monday);
+
+    date.setDate(
+      monday.getDate() + index
+    );
+
+
+    const dateString =
+      formatDate(date);
+
 
     html += `
+
       <div class="day-title">
-        ${d}
+        ${d} · ${dateString}
       </div>
+
     `;
 
-    if(!lessons.length) {
+
+    if(!lessons.length){
 
       html += `
+
         <div class="empty">
           Занятий нет
         </div>
+
       `;
 
-    } else {
+    }else{
 
-      lessons.forEach(l => {
-        html += lessonCard(l);
+      lessons.forEach(lesson => {
+
+        html += lessonCard(
+          lesson,
+          dateString
+        );
+
       });
 
     }
 
   });
 
+
   return html;
+
 }
 
 
-function changeWeek(value) {
+/* =====================================================
+   ПЕРЕКЛЮЧЕНИЕ НЕДЕЛИ
+===================================================== */
+
+function changeWeek(value){
 
   weekOffset += value;
 
   render();
+
 }
 
 
-function getHomework() {
+/* =====================================================
+   ВКЛАДКА Д/З
+===================================================== */
 
-  try {
+function renderHomework(){
 
-    return JSON.parse(
-      localStorage.getItem("sr426_homework") || "[]"
-    );
+  const items =
+    getHomework();
 
-  } catch(e) {
-
-    return [];
-
-  }
-}
-
-
-function renderHomework() {
-
-  const items = getHomework();
 
   let html = `
 
@@ -754,33 +1297,52 @@ function renderHomework() {
       Домашние задания
     </div>
 
-    <button class="add-button" onclick="openModal()">
+
+    <button
+      class="add-button"
+      onclick="openModal()"
+    >
       ＋ Добавить домашнее задание
     </button>
 
   `;
 
-  if(!items.length) {
+
+  if(!items.length){
 
     html += `
+
       <div class="empty">
+
         Пока нет домашних заданий.
+
+        <br><br>
+
+        Добавь первое задание,
+        и оно автоматически появится
+        под нужным предметом.
+
       </div>
+
     `;
 
     return html;
+
   }
 
+
   items
-    .sort((a,b) => a.date.localeCompare(b.date))
-    .forEach((item,index) => {
+    .sort((a,b) =>
+      a.date.localeCompare(b.date)
+    )
+    .forEach(item => {
 
       html += `
 
         <div class="homework-item">
 
           <div class="homework-date">
-            ${item.date}
+            ${escapeHtml(item.date)}
           </div>
 
           <div class="homework-subject">
@@ -794,7 +1356,7 @@ function renderHomework() {
           <br>
 
           <button
-            onclick="deleteHomework(${index})"
+            onclick="deleteHomeworkById('${item.id}')"
             style="
               background:#f0f2f6;
               padding:8px 12px;
@@ -811,102 +1373,24 @@ function renderHomework() {
 
     });
 
+
   return html;
-}
-
-
-function escapeHtml(text) {
-
-  return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-
-function openModal() {
-
-  document.getElementById("homeworkModal")
-    .classList.add("show");
 
 }
 
 
-function closeModal() {
+/* =====================================================
+   О САЙТЕ
+===================================================== */
 
-  document.getElementById("homeworkModal")
-    .classList.remove("show");
-
-}
-
-
-function saveHomework() {
-
-  const subject =
-    document.getElementById("hwSubject").value.trim();
-
-  const date =
-    document.getElementById("hwDate").value;
-
-  const text =
-    document.getElementById("hwText").value.trim();
-
-  if(!subject || !date || !text) {
-
-    alert("Заполни все поля.");
-
-    return;
-  }
-
-  const items = getHomework();
-
-  items.push({
-    subject,
-    date,
-    text
-  });
-
-  localStorage.setItem(
-    "sr426_homework",
-    JSON.stringify(items)
-  );
-
-  document.getElementById("hwSubject").value = "";
-  document.getElementById("hwDate").value = "";
-  document.getElementById("hwText").value = "";
-
-  closeModal();
-
-  render();
-
-}
-
-
-function deleteHomework(index) {
-
-  const items = getHomework();
-
-  items.splice(index,1);
-
-  localStorage.setItem(
-    "sr426_homework",
-    JSON.stringify(items)
-  );
-
-  render();
-
-}
-
-
-function renderAbout() {
+function renderAbout(){
 
   return `
 
     <div class="section-title">
       О сайте
     </div>
+
 
     <div class="about-card">
 
@@ -918,81 +1402,247 @@ function renderAbout() {
 
       <p>
         Здесь можно посмотреть расписание
-        занятий по дням и неделям, а также
-        сохранять домашние задания.
+        занятий по дням и неделям.
       </p>
 
       <p>
-        Расписание разделено на чётные
-        и нечётные недели.
+        Домашнее задание можно добавить
+        к конкретному предмету и дате.
       </p>
 
       <p>
-        Домашние задания сохраняются
-        непосредственно на этом устройстве.
+        После добавления оно автоматически
+        отображается прямо под соответствующим
+        занятием.
+      </p>
+
+      <p>
+        Все домашние задания сохраняются
+        на этом устройстве.
       </p>
 
     </div>
 
   `;
+
 }
 
 
-function showSection(section) {
+/* =====================================================
+   ОКНО ДОБАВЛЕНИЯ
+===================================================== */
 
-  currentSection = section;
+function openModal(){
 
-  weekOffset = 0;
+  document
+    .getElementById("homeworkModal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  document
+    .getElementById("homeworkModal")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   СОХРАНЕНИЕ Д/З
+===================================================== */
+
+function saveHomework(){
+
+  const subject =
+    document
+      .getElementById("hwSubject")
+      .value
+      .trim();
+
+
+  const date =
+    document
+      .getElementById("hwDate")
+      .value;
+
+
+  const text =
+    document
+      .getElementById("hwText")
+      .value
+      .trim();
+
+
+  if(!subject || !date || !text){
+
+    alert(
+      "Заполни предмет, дату и домашнее задание."
+    );
+
+    return;
+
+  }
+
+
+  const items =
+    getHomework();
+
+
+  items.push({
+
+    id:
+      Date.now().toString()
+      +
+      Math.random()
+        .toString(36)
+        .slice(2),
+
+    subject:subject,
+
+    date:date,
+
+    text:text
+
+  });
+
+
+  localStorage.setItem(
+    "sr426_homework",
+    JSON.stringify(items)
+  );
+
+
+  document
+    .getElementById("hwSubject")
+    .value = "";
+
+
+  document
+    .getElementById("hwDate")
+    .value = "";
+
+
+  document
+    .getElementById("hwText")
+    .value = "";
+
+
+  closeModal();
+
 
   render();
 
 }
 
 
-function render() {
+/* =====================================================
+   УДАЛЕНИЕ Д/З
+===================================================== */
+
+function deleteHomeworkById(id){
+
+  const items =
+    getHomework()
+      .filter(item =>
+        String(item.id) !== String(id)
+      );
+
+
+  localStorage.setItem(
+    "sr426_homework",
+    JSON.stringify(items)
+  );
+
+
+  render();
+
+}
+
+
+/* =====================================================
+   НАВИГАЦИЯ
+===================================================== */
+
+function showSection(section){
+
+  currentSection =
+    section;
+
+  weekOffset =
+    0;
+
+  render();
+
+}
+
+
+/* =====================================================
+   ОТРИСОВКА
+===================================================== */
+
+function render(){
 
   const content =
     document.getElementById("content");
 
-  if(currentSection === "today") {
 
-    content.innerHTML = renderToday();
+  if(currentSection === "today"){
 
-  }
-
-  else if(currentSection === "week") {
-
-    content.innerHTML = renderWeek();
+    content.innerHTML =
+      renderToday();
 
   }
 
-  else if(currentSection === "homework") {
+  else if(currentSection === "week"){
 
-    content.innerHTML = renderHomework();
-
-  }
-
-  else if(currentSection === "about") {
-
-    content.innerHTML = renderAbout();
+    content.innerHTML =
+      renderWeek();
 
   }
 
+  else if(currentSection === "homework"){
 
-  document.querySelectorAll(".nav button")
-    .forEach(button => button.classList.remove("active"));
+    content.innerHTML =
+      renderHomework();
+
+  }
+
+  else if(currentSection === "about"){
+
+    content.innerHTML =
+      renderAbout();
+
+  }
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(button =>
+      button.classList.remove("active")
+    );
+
 
   const active =
     document.getElementById(
       "nav-" + currentSection
     );
 
-  if(active) {
+
+  if(active){
+
     active.classList.add("active");
+
   }
 
 }
 
+
+/* =====================================================
+   ЗАПУСК
+===================================================== */
 
 render();
 
