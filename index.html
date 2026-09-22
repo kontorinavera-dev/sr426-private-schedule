@@ -268,8 +268,6 @@ button {
     margin-top: 0;
 }
 
-/* Нижнее меню */
-
 .bottom-nav {
     position: fixed;
     z-index: 100;
@@ -310,8 +308,6 @@ button {
     background: #eef1f6;
     color: #252a32;
 }
-
-/* Модальное окно */
 
 .modal-bg {
     position: fixed;
@@ -430,13 +426,11 @@ button {
 
 <main class="container">
 
-    <!-- СЕГОДНЯ -->
     <section id="today" class="section active">
         <div class="day-header" id="todayTitle"></div>
         <div id="todayLessons"></div>
     </section>
 
-    <!-- НЕДЕЛЯ -->
     <section id="week" class="section">
 
         <div class="week-nav">
@@ -448,7 +442,6 @@ button {
         <div id="weekLessons"></div>
     </section>
 
-    <!-- ДОМАШНЕЕ ЗАДАНИЕ -->
     <section id="homework" class="section">
 
         <div class="day-header">Домашние задания</div>
@@ -463,7 +456,6 @@ button {
         <div id="homeworkList" class="hw-list"></div>
     </section>
 
-    <!-- О САЙТЕ -->
     <section id="about" class="section">
 
         <div class="about-card">
@@ -488,29 +480,31 @@ button {
 
 </main>
 
-<!-- НИЖНЕЕ МЕНЮ -->
-
 <nav class="bottom-nav">
 
-    <button class="nav-button active" data-section="today"
+    <button class="nav-button active"
+            data-section="today"
             onclick="openSection('today')">
         <span class="nav-icon">⌂</span>
         <span>Сегодня</span>
     </button>
 
-    <button class="nav-button" data-section="week"
+    <button class="nav-button"
+            data-section="week"
             onclick="openSection('week')">
         <span class="nav-icon">▦</span>
         <span>Неделя</span>
     </button>
 
-    <button class="nav-button" data-section="homework"
+    <button class="nav-button"
+            data-section="homework"
             onclick="openSection('homework')">
         <span class="nav-icon">✓</span>
         <span>Д/З</span>
     </button>
 
-    <button class="nav-button" data-section="about"
+    <button class="nav-button"
+            data-section="about"
             onclick="openSection('about')">
         <span class="nav-icon">ⓘ</span>
         <span>О сайте</span>
@@ -518,9 +512,9 @@ button {
 
 </nav>
 
-<!-- МОДАЛЬНОЕ ОКНО Д/З -->
-
-<div class="modal-bg" id="modalBg" onclick="backgroundClose(event)">
+<div class="modal-bg"
+     id="modalBg"
+     onclick="backgroundClose(event)">
 
     <div class="modal">
 
@@ -535,9 +529,7 @@ button {
         <div class="field">
             <label>Дата</label>
 
-            <input
-                type="date"
-                id="hwDate">
+            <input type="date" id="hwDate">
         </div>
 
         <div class="field">
@@ -550,27 +542,28 @@ button {
 
         <div class="modal-actions">
 
-            <button
-                class="cancel"
-                onclick="closeHomeworkModal()">
+            <button class="cancel"
+                    onclick="closeHomeworkModal()">
                 Отмена
             </button>
 
-            <button
-                class="save"
-                onclick="saveHomework()">
+            <button class="save"
+                    onclick="saveHomework()">
                 Сохранить
             </button>
 
         </div>
 
-        <div id="deleteArea" style="display:none; margin-top:9px;">
+        <div id="deleteArea"
+             style="display:none; margin-top:9px;">
+
             <button
                 class="delete"
                 style="width:100%;"
                 onclick="deleteHomework()">
                 Удалить Д/З
             </button>
+
         </div>
 
     </div>
@@ -579,13 +572,8 @@ button {
 <script>
 
 /* =========================================================
-   РАСПИСАНИЕ
+   РАСПИСАНИЕ СР-426
    ========================================================= */
-
-/*
-   У каждого предмета теперь есть постоянный ID.
-   Именно он используется для связи с домашним заданием.
-*/
 
 const schedule = {
 
@@ -683,7 +671,6 @@ const schedule = {
 
     4: {
         name: "Четверг",
-
         odd: [],
         even: []
     },
@@ -734,7 +721,6 @@ const schedule = {
 
     0: {
         name: "Воскресенье",
-
         odd: [],
         even: []
     }
@@ -742,22 +728,23 @@ const schedule = {
 
 
 /* =========================================================
-   ПРЕДМЕТЫ
+   НАЗВАНИЯ ПРЕДМЕТОВ
    ========================================================= */
 
 const subjectNames = {};
 
 for (const day in schedule) {
 
-    ["odd", "even"].forEach(weekType => {
+    ["odd", "even"].forEach(type => {
 
-        schedule[day][weekType].forEach(lesson => {
+        schedule[day][type].forEach(lesson => {
 
             subjectNames[lesson[0]] = lesson[2];
 
         });
 
     });
+
 }
 
 
@@ -770,17 +757,15 @@ let homework = [];
 let editingHomeworkId = null;
 
 
-/*
-   Загружаем Д/З из браузера.
-*/
-
 function loadHomework() {
 
     try {
 
-        const saved = localStorage.getItem("sr426_homework");
+        const saved =
+            localStorage.getItem("sr426_homework");
 
-        homework = saved ? JSON.parse(saved) : [];
+        homework =
+            saved ? JSON.parse(saved) : [];
 
     } catch (e) {
 
@@ -793,10 +778,25 @@ function loadHomework() {
 }
 
 
-/*
-   Старые записи могли храниться только с названием предмета.
-   Здесь мы автоматически пытаемся определить ID предмета.
-*/
+function saveHomeworkData() {
+
+    localStorage.setItem(
+        "sr426_homework",
+        JSON.stringify(homework)
+    );
+
+}
+
+
+function normalize(value) {
+
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+
+}
+
 
 function migrateOldHomework() {
 
@@ -806,10 +806,12 @@ function migrateOldHomework() {
 
         if (!item.subjectId) {
 
-            const found = Object.entries(subjectNames)
-                .find(([id, name]) =>
-                    normalize(name) === normalize(item.subject)
-                );
+            const found =
+                Object.entries(subjectNames)
+                    .find(([id, name]) =>
+                        normalize(name) ===
+                        normalize(item.subject)
+                    );
 
             if (found) {
 
@@ -823,35 +825,11 @@ function migrateOldHomework() {
 
     });
 
-    if (changed) saveHomeworkData();
+    if (changed) {
 
-}
+        saveHomeworkData();
 
-
-/*
-   Нормализация текста.
-*/
-
-function normalize(value) {
-
-    return String(value || "")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, " ");
-
-}
-
-
-/*
-   Сохранение.
-*/
-
-function saveHomeworkData() {
-
-    localStorage.setItem(
-        "sr426_homework",
-        JSON.stringify(homework)
-    );
+    }
 
 }
 
@@ -864,9 +842,13 @@ function toISO(date) {
 
     const y = date.getFullYear();
 
-    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const m =
+        String(date.getMonth() + 1)
+        .padStart(2, "0");
 
-    const d = String(date.getDate()).padStart(2, "0");
+    const d =
+        String(date.getDate())
+        .padStart(2, "0");
 
     return `${y}-${m}-${d}`;
 
@@ -901,59 +883,79 @@ function formatShortDate(date) {
 
 
 /* =========================================================
-   НОМЕР НЕДЕЛИ
+   ОПРЕДЕЛЕНИЕ ЧЁТНОЙ / НЕЧЁТНОЙ НЕДЕЛИ
    ========================================================= */
+
+/*
+   ВАЖНО:
+
+   Текущая неделя считается ЧЁТНОЙ.
+
+   Следующая неделя — НЕЧЁТНАЯ.
+   Через неделю — снова ЧЁТНАЯ.
+
+   Это сделано относительно текущей недели,
+   поэтому календарная нумерация ISO здесь
+   не используется.
+*/
+
+function getMonday(offset = 0) {
+
+    const now = new Date();
+
+    now.setHours(0, 0, 0, 0);
+
+    const day = now.getDay();
+
+    const diff =
+        day === 0 ? -6 : 1 - day;
+
+    now.setDate(
+        now.getDate() +
+        diff +
+        offset * 7
+    );
+
+    return now;
+
+}
+
 
 function getWeekType(date) {
 
-    /*
-       Здесь используется ISO-неделя.
-       Нечётная / чётная определяется по номеру недели.
-    */
+    const currentMonday =
+        getMonday(0);
 
-    const temp = new Date(date);
+    const targetMonday =
+        new Date(date);
 
-    temp.setHours(0,0,0,0);
+    currentMonday.setHours(0, 0, 0, 0);
 
-    temp.setDate(
-        temp.getDate() + 4 - (temp.getDay() || 7)
-    );
+    targetMonday.setHours(0, 0, 0, 0);
 
-    const yearStart = new Date(
-        temp.getFullYear(),
-        0,
-        1
-    );
+    const diffDays =
+        Math.round(
+            (targetMonday - currentMonday) /
+            86400000
+        );
 
-    const weekNo = Math.ceil(
-        (
-            (
-                (temp - yearStart) / 86400000
-            ) + 1
-        ) / 7
-    );
+    const weekDifference =
+        Math.floor(diffDays / 7);
 
-    return weekNo % 2 === 0 ? "even" : "odd";
+    return weekDifference % 2 === 0
+        ? "even"
+        : "odd";
 
 }
 
 
 /* =========================================================
-   ПОЛУЧЕНИЕ Д/З
+   ПОЛУЧЕНИЕ ДОМАШНЕГО ЗАДАНИЯ
    ========================================================= */
 
 function getHomework(subjectId, dateISO) {
 
     return homework.filter(item => {
-
-        /*
-           Новая система:
-           subjectId + дата.
-
-           Старая система:
-           если subjectId ещё нет, дополнительно
-           проверяем название.
-        */
 
         if (item.subjectId) {
 
@@ -976,7 +978,7 @@ function getHomework(subjectId, dateISO) {
 
 
 /* =========================================================
-   КАРТОЧКА ПРЕДМЕТА
+   ЭКРАН ПРЕДМЕТА
    ========================================================= */
 
 function lessonHTML(lesson, date) {
@@ -990,33 +992,35 @@ function lessonHTML(lesson, date) {
 
     const dateISO = toISO(date);
 
-    const hw = getHomework(subjectId, dateISO);
+    const hw =
+        getHomework(subjectId, dateISO);
 
     let homeworkHTML = "";
 
     if (hw.length > 0) {
 
-        homeworkHTML = hw.map(item => `
+        homeworkHTML =
+            hw.map(item => `
 
-            <div class="homework-box">
+                <div class="homework-box">
 
-                <div class="homework-title">
-                    Домашнее задание
+                    <div class="homework-title">
+                        Домашнее задание
+                    </div>
+
+                    <div class="homework-text">
+                        ${escapeHTML(item.text)}
+                    </div>
+
+                    <button
+                        class="add-hw"
+                        onclick="editHomework('${item.id}')">
+                        Изменить
+                    </button>
+
                 </div>
 
-                <div class="homework-text">
-                    ${escapeHTML(item.text)}
-                </div>
-
-                <button
-                    class="add-hw"
-                    onclick="editHomework('${item.id}')">
-                    Изменить
-                </button>
-
-            </div>
-
-        `).join("");
+            `).join("");
 
     } else {
 
@@ -1073,7 +1077,7 @@ function lessonHTML(lesson, date) {
 
 
 /* =========================================================
-   ЭКРАН "СЕГОДНЯ"
+   СЕГОДНЯ
    ========================================================= */
 
 function renderToday() {
@@ -1082,16 +1086,21 @@ function renderToday() {
 
     const day = date.getDay();
 
-    const weekType = getWeekType(date);
+    const weekType =
+        getWeekType(date);
 
     const lessons =
         schedule[day][weekType];
 
-    document.getElementById("todayTitle").textContent =
+    document.getElementById(
+        "todayTitle"
+    ).textContent =
         `${schedule[day].name} · ${formatDate(date)}`;
 
     const container =
-        document.getElementById("todayLessons");
+        document.getElementById(
+            "todayLessons"
+        );
 
     if (!lessons.length) {
 
@@ -1107,8 +1116,10 @@ function renderToday() {
 
     container.innerHTML =
         lessons
-        .map(lesson => lessonHTML(lesson, date))
-        .join("");
+            .map(lesson =>
+                lessonHTML(lesson, date)
+            )
+            .join("");
 
 }
 
@@ -1118,25 +1129,6 @@ function renderToday() {
    ========================================================= */
 
 let weekOffset = 0;
-
-
-function getMonday(offset = 0) {
-
-    const now = new Date();
-
-    now.setHours(0,0,0,0);
-
-    const day = now.getDay();
-
-    const diff = day === 0 ? -6 : 1 - day;
-
-    now.setDate(
-        now.getDate() + diff + offset * 7
-    );
-
-    return now;
-
-}
 
 
 function changeWeek(direction) {
@@ -1150,33 +1142,42 @@ function changeWeek(direction) {
 
 function renderWeek() {
 
-    const monday = getMonday(weekOffset);
+    const monday =
+        getMonday(weekOffset);
 
-    const sunday = new Date(monday);
+    const sunday =
+        new Date(monday);
 
     sunday.setDate(
         monday.getDate() + 6
     );
 
-    document.getElementById("weekTitle").textContent =
+    document.getElementById(
+        "weekTitle"
+    ).textContent =
         `${formatShortDate(monday)} — ${formatShortDate(sunday)}`;
 
     const container =
-        document.getElementById("weekLessons");
+        document.getElementById(
+            "weekLessons"
+        );
 
     let html = "";
 
     for (let i = 0; i < 6; i++) {
 
-        const date = new Date(monday);
+        const date =
+            new Date(monday);
 
         date.setDate(
             monday.getDate() + i
         );
 
-        const day = date.getDay();
+        const day =
+            date.getDay();
 
-        const weekType = getWeekType(date);
+        const weekType =
+            getWeekType(date);
 
         const lessons =
             schedule[day][weekType];
@@ -1203,9 +1204,12 @@ function renderWeek() {
 
         } else {
 
-            html += lessons
-                .map(lesson => lessonHTML(lesson, date))
-                .join("");
+            html +=
+                lessons
+                    .map(lesson =>
+                        lessonHTML(lesson, date)
+                    )
+                    .join("");
 
         }
 
@@ -1217,7 +1221,7 @@ function renderWeek() {
 
 
 /* =========================================================
-   РАЗДЕЛЫ
+   ПЕРЕКЛЮЧЕНИЕ РАЗДЕЛОВ
    ========================================================= */
 
 function openSection(section) {
@@ -1225,7 +1229,9 @@ function openSection(section) {
     document
         .querySelectorAll(".section")
         .forEach(el => {
+
             el.classList.remove("active");
+
         });
 
     document
@@ -1271,7 +1277,9 @@ function openSection(section) {
 function renderHomework() {
 
     const container =
-        document.getElementById("homeworkList");
+        document.getElementById(
+            "homeworkList"
+        );
 
     if (!homework.length) {
 
@@ -1285,27 +1293,29 @@ function renderHomework() {
 
     }
 
-    const sorted = [...homework].sort(
-        (a,b) => {
+    const sorted =
+        [...homework].sort(
+            (a, b) => {
 
-            if (a.date !== b.date) {
+                if (a.date !== b.date) {
 
-                return a.date.localeCompare(b.date);
+                    return a.date.localeCompare(
+                        b.date
+                    );
+
+                }
+
+                return normalize(a.subject)
+                    .localeCompare(
+                        normalize(b.subject),
+                        "ru"
+                    );
 
             }
+        );
 
-            return normalize(a.subject)
-                .localeCompare(
-                    normalize(b.subject),
-                    "ru"
-                );
-
-        }
-    );
-
-    container.innerHTML = sorted.map(item => {
-
-        return `
+    container.innerHTML =
+        sorted.map(item => `
 
             <div class="hw-item">
 
@@ -1343,24 +1353,23 @@ function renderHomework() {
 
             </div>
 
-        `;
-
-    }).join("");
+        `).join("");
 
 }
 
-
-/* =========================================================
-   ФОРМАТИРОВАНИЕ ISO-ДАТЫ
-   ========================================================= */
 
 function formatISOForDisplay(iso) {
 
     if (!iso) return "";
 
-    const parts = iso.split("-");
+    const parts =
+        iso.split("-");
 
-    if (parts.length !== 3) return iso;
+    if (parts.length !== 3) {
+
+        return iso;
+
+    }
 
     return `${parts[2]}.${parts[1]}.${parts[0]}`;
 
@@ -1374,20 +1383,21 @@ function formatISOForDisplay(iso) {
 function fillSubjectSelect() {
 
     const select =
-        document.getElementById("hwSubject");
+        document.getElementById(
+            "hwSubject"
+        );
 
     const ids =
         Object.keys(subjectNames);
 
-    select.innerHTML = ids.map(id => {
+    select.innerHTML =
+        ids.map(id => `
 
-        return `
             <option value="${id}">
                 ${escapeHTML(subjectNames[id])}
             </option>
-        `;
 
-    }).join("");
+        `).join("");
 
 }
 
@@ -1399,27 +1409,42 @@ function openHomeworkModal(
 
     editingHomeworkId = null;
 
-    document.getElementById("modalTitle").textContent =
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
         "Добавить Д/З";
 
-    document.getElementById("deleteArea").style.display =
+    document.getElementById(
+        "deleteArea"
+    ).style.display =
         "none";
 
     fillSubjectSelect();
 
     const select =
-        document.getElementById("hwSubject");
+        document.getElementById(
+            "hwSubject"
+        );
 
-    if (subjectId && subjectNames[subjectId]) {
+    if (
+        subjectId &&
+        subjectNames[subjectId]
+    ) {
 
-        select.value = subjectId;
+        select.value =
+            subjectId;
 
     }
 
-    document.getElementById("hwDate").value =
-        dateISO || toISO(new Date());
+    document.getElementById(
+        "hwDate"
+    ).value =
+        dateISO ||
+        toISO(new Date());
 
-    document.getElementById("hwText").value = "";
+    document.getElementById(
+        "hwText"
+    ).value = "";
 
     document
         .getElementById("modalBg")
@@ -1457,13 +1482,19 @@ function backgroundClose(event) {
 function saveHomework() {
 
     const subjectId =
-        document.getElementById("hwSubject").value;
+        document.getElementById(
+            "hwSubject"
+        ).value;
 
     const date =
-        document.getElementById("hwDate").value;
+        document.getElementById(
+            "hwDate"
+        ).value;
 
     const text =
-        document.getElementById("hwText").value.trim();
+        document.getElementById(
+            "hwText"
+        ).value.trim();
 
     if (!subjectId) {
 
@@ -1496,15 +1527,24 @@ function saveHomework() {
 
         const item =
             homework.find(
-                x => x.id === editingHomeworkId
+                x =>
+                    x.id ===
+                    editingHomeworkId
             );
 
         if (item) {
 
-            item.subjectId = subjectId;
-            item.subject = subject;
-            item.date = date;
-            item.text = text;
+            item.subjectId =
+                subjectId;
+
+            item.subject =
+                subject;
+
+            item.date =
+                date;
+
+            item.text =
+                text;
 
         }
 
@@ -1514,15 +1554,21 @@ function saveHomework() {
 
             id:
                 Date.now().toString() +
-                Math.random().toString(16).slice(2),
+                Math.random()
+                    .toString(16)
+                    .slice(2),
 
-            subjectId: subjectId,
+            subjectId:
+                subjectId,
 
-            subject: subject,
+            subject:
+                subject,
 
-            date: date,
+            date:
+                date,
 
-            text: text
+            text:
+                text
 
         });
 
@@ -1542,7 +1588,7 @@ function saveHomework() {
 
 
 /* =========================================================
-   РЕДАКТИРОВАНИЕ
+   РЕДАКТИРОВАНИЕ Д/З
    ========================================================= */
 
 function editHomework(id) {
@@ -1558,19 +1604,29 @@ function editHomework(id) {
 
     fillSubjectSelect();
 
-    document.getElementById("modalTitle").textContent =
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
         "Изменить Д/З";
 
-    document.getElementById("hwSubject").value =
+    document.getElementById(
+        "hwSubject"
+    ).value =
         item.subjectId || "";
 
-    document.getElementById("hwDate").value =
+    document.getElementById(
+        "hwDate"
+    ).value =
         item.date || "";
 
-    document.getElementById("hwText").value =
+    document.getElementById(
+        "hwText"
+    ).value =
         item.text || "";
 
-    document.getElementById("deleteArea").style.display =
+    document.getElementById(
+        "deleteArea"
+    ).style.display =
         "block";
 
     document
@@ -1581,14 +1637,16 @@ function editHomework(id) {
 
 
 /* =========================================================
-   УДАЛЕНИЕ
+   УДАЛЕНИЕ Д/З
    ========================================================= */
 
 function deleteHomework() {
 
     if (!editingHomeworkId) return;
 
-    deleteHomeworkById(editingHomeworkId);
+    deleteHomeworkById(
+        editingHomeworkId
+    );
 
     closeHomeworkModal();
 
@@ -1614,7 +1672,7 @@ function deleteHomeworkById(id) {
 
 
 /* =========================================================
-   БЕЗОПАСНЫЙ HTML
+   ЗАЩИТА ТЕКСТА
    ========================================================= */
 
 function escapeHTML(value) {
