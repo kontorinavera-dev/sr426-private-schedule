@@ -2,19 +2,13 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-      maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>СР-426 — Расписание</title>
 
-<!-- PWA -->
 <link rel="manifest" href="./manifest.json">
 
 <meta name="theme-color" content="#e8edf5">
-
-<!-- iPhone -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="СР-426">
@@ -22,2407 +16,1887 @@
 <link rel="apple-touch-icon" href="./icon-192.png">
 
 <style>
-
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-body {
-    margin: 0;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background: #f3f4f7;
-    color: #17191d;
-    padding-bottom: 95px;
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
+  background:#f3f4f7;
+  color:#17191d;
+  padding-bottom:95px;
 }
 
-/* ---------- HEADER ---------- */
-
-.header {
-    padding: 42px 20px 25px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #e8edf5 0%,
-            #f3f4f7 100%
-        );
+.header{
+  padding:42px 20px 25px;
+  background:linear-gradient(180deg,#e8edf5 0%,#f3f4f7 100%);
 }
 
-.header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.header-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-.title {
-    font-size: 42px;
-    line-height: 1;
-    font-weight: 800;
-    letter-spacing: -1.5px;
+.title{
+  font-size:42px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-1.5px;
 }
 
-.subtitle {
-    margin-top: 8px;
-    color: #70757f;
-    font-size: 16px;
+.subtitle{
+  margin-top:8px;
+  color:#70757f;
+  font-size:16px;
 }
 
-.info-button {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-    border: none;
-
-    background: white;
-    color: #555b66;
-
-    font-size: 20px;
-
-    box-shadow:
-        0 3px 12px rgba(0,0,0,.06);
+.info-button,
+.week-button{
+  border:none;
+  background:white;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
-/* ---------- CONTENT ---------- */
-
-.container {
-    padding: 0 15px;
-    max-width: 700px;
-    margin: 0 auto;
+.info-button{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  color:#555b66;
+  font-size:20px;
 }
 
-.day-header {
-    margin:
-        8px 4px
-        12px;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    color: #8a8f99;
-
-    text-transform: uppercase;
-    letter-spacing: .5px;
+.container{
+  padding:0 15px;
+  max-width:700px;
+  margin:0 auto;
 }
 
-.lesson {
-    background: white;
-
-    border-radius: 22px;
-
-    padding: 17px;
-
-    margin-bottom: 12px;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,.055);
+.day-header{
+  margin:8px 4px 12px;
+  font-size:14px;
+  font-weight:700;
+  color:#8a8f99;
+  text-transform:uppercase;
+  letter-spacing:.5px;
 }
 
-.lesson-time {
-    font-size: 14px;
-    font-weight: 700;
-
-    color: #7b818c;
-
-    margin-bottom: 8px;
+.lesson{
+  background:white;
+  border-radius:22px;
+  padding:17px;
+  margin-bottom:12px;
+  box-shadow:0 3px 14px rgba(0,0,0,.055);
 }
 
-.lesson-name {
-    font-size: 18px;
-    line-height: 1.25;
-
-    font-weight: 750;
-
-    margin-bottom: 9px;
+.lesson-time{
+  font-size:14px;
+  font-weight:700;
+  color:#7b818c;
+  margin-bottom:8px;
 }
 
-.lesson-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
+.lesson-name{
+  font-size:18px;
+  line-height:1.25;
+  font-weight:750;
+  margin-bottom:9px;
 }
 
-.badge {
-    display: inline-block;
-
-    padding: 6px 9px;
-
-    border-radius: 10px;
-
-    background: #f0f2f5;
-    color: #6d727c;
-
-    font-size: 12px;
-    font-weight: 600;
+.lesson-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
 }
 
-.no-lessons {
-    background: white;
-
-    border-radius: 22px;
-
-    padding: 28px 20px;
-
-    text-align: center;
-
-    color: #858a94;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,.04);
+.badge{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:10px;
+  background:#f0f2f5;
+  color:#6d727c;
+  font-size:12px;
+  font-weight:600;
 }
 
-/* ---------- HOMEWORK ---------- */
-
-.homework-box {
-    margin-top: 13px;
-
-    padding: 12px 13px;
-
-    border-radius: 15px;
-
-    background: #f4f7ff;
-
-    border: 1px solid #e2e8ff;
+.no-lessons,
+.empty{
+  background:white;
+  border-radius:22px;
+  padding:28px 20px;
+  text-align:center;
+  color:#858a94;
+  box-shadow:0 3px 14px rgba(0,0,0,.04);
 }
 
-.homework-title {
-    font-size: 12px;
-    font-weight: 800;
-
-    color: #59698f;
-
-    margin-bottom: 5px;
-
-    text-transform: uppercase;
-    letter-spacing: .3px;
+.homework-box{
+  margin-top:13px;
+  padding:12px 13px;
+  border-radius:15px;
+  background:#f4f7ff;
+  border:1px solid #e2e8ff;
 }
 
-.homework-text {
-    font-size: 14px;
-    line-height: 1.4;
-
-    color: #30343b;
-
-    white-space: pre-wrap;
+.homework-title{
+  font-size:12px;
+  font-weight:800;
+  color:#59698f;
+  margin-bottom:5px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
 }
 
-.add-hw {
-    margin-top: 12px;
-
-    border: none;
-
-    background: #f0f2f5;
-    color: #60656e;
-
-    padding: 9px 12px;
-
-    border-radius: 12px;
-
-    font-size: 13px;
-    font-weight: 700;
+.homework-text{
+  font-size:14px;
+  line-height:1.4;
+  color:#30343b;
+  white-space:pre-wrap;
 }
 
-/* ---------- WEEK ---------- */
-
-.week-nav {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    margin:
-        0 2px
-        15px;
+.add-hw,
+.small-button{
+  margin-top:12px;
+  border:none;
+  background:#f0f2f5;
+  color:#60656e;
+  padding:9px 12px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:700;
 }
 
-.week-button {
-    border: none;
-
-    background: white;
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    font-size: 20px;
-
-    box-shadow:
-        0 3px 12px rgba(0,0,0,.05);
+.week-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 2px 15px;
 }
 
-.week-title {
-    text-align: center;
-
-    font-size: 16px;
-    font-weight: 750;
+.week-button{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  font-size:28px;
+  color:#007aff;
 }
 
-/* ---------- SECTIONS ---------- */
-
-.section {
-    display: none;
+.week-title{
+  text-align:center;
+  font-size:16px;
+  font-weight:750;
 }
 
-.section.active {
-    display: block;
+.section{
+  display:none;
 }
 
-/* ---------- HOMEWORK LIST ---------- */
-
-.hw-list {
-    display: flex;
-    flex-direction: column;
-
-    gap: 12px;
+.section.active{
+  display:block;
 }
 
-.hw-item {
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 16px;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,.05);
+.hw-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.hw-subject {
-    font-size: 17px;
-    font-weight: 750;
+.hw-item{
+  background:white;
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 3px 14px rgba(0,0,0,.05);
 }
 
-.hw-date {
-    margin-top: 4px;
-
-    font-size: 12px;
-
-    color: #858a94;
+.hw-subject{
+  font-size:17px;
+  font-weight:750;
 }
 
-.hw-text {
-    margin-top: 10px;
-
-    font-size: 14px;
-    line-height: 1.45;
-
-    white-space: pre-wrap;
+.hw-date{
+  margin-top:4px;
+  font-size:12px;
+  color:#858a94;
 }
 
-.hw-actions {
-    margin-top: 13px;
-
-    display: flex;
-    gap: 8px;
+.hw-text{
+  margin-top:10px;
+  font-size:14px;
+  line-height:1.45;
+  white-space:pre-wrap;
 }
 
-.small-button {
-    border: none;
-
-    border-radius: 11px;
-
-    padding: 8px 11px;
-
-    background: #f0f2f5;
-    color: #666b74;
-
-    font-weight: 700;
-
-    font-size: 12px;
+.hw-actions{
+  margin-top:13px;
+  display:flex;
+  gap:8px;
 }
 
-.empty {
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 28px 18px;
-
-    text-align: center;
-
-    color: #858a94;
+.small-button{
+  margin-top:0;
+  padding:8px 11px;
+  font-size:12px;
 }
 
-/* ---------- ABOUT ---------- */
-
-.about-card {
-    background: white;
-
-    border-radius: 22px;
-
-    padding: 22px;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,.05);
-
-    line-height: 1.55;
-
-    color: #4e535c;
+.about-card{
+  background:white;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 3px 14px rgba(0,0,0,.05);
+  line-height:1.55;
+  color:#4e535c;
 }
 
-.about-card h2 {
-    color: #17191d;
-
-    margin-top: 0;
+.about-card h2{
+  color:#17191d;
+  margin-top:0;
 }
 
-/* ---------- BOTTOM NAV ---------- */
-
-.bottom-nav {
-    position: fixed;
-
-    z-index: 100;
-
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-
-    height: 70px;
-
-    background:
-        rgba(255,255,255,.94);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    border-radius: 23px;
-
-    box-shadow:
-        0 7px 28px rgba(0,0,0,.12);
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    padding: 5px;
+.bottom-nav{
+  position:fixed;
+  z-index:100;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  height:70px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-radius:23px;
+  box-shadow:0 7px 28px rgba(0,0,0,.12);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:5px;
 }
 
-.nav-button {
-    border: none;
-
-    background: transparent;
-
-    border-radius: 18px;
-
-    color: #858a94;
-
-    font-size: 11px;
-    font-weight: 700;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 3px;
+.nav-button{
+  border:none;
+  background:transparent;
+  border-radius:18px;
+  color:#858a94;
+  font-size:11px;
+  font-weight:700;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
 }
 
-.nav-icon {
-    font-size: 20px;
-    line-height: 1;
+.nav-icon{
+  font-size:20px;
+  line-height:1;
 }
 
-.nav-button.active {
-    background: #eef1f6;
-    color: #252a32;
+.nav-button.active{
+  background:#eef1f6;
+  color:#252a32;
 }
 
-/* ---------- MODAL ---------- */
-
-.modal-bg {
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(0,0,0,.38);
-
-    z-index: 200;
-
-    display: none;
-
-    align-items: flex-end;
-    justify-content: center;
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.38);
+  z-index:200;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
 }
 
-.modal-bg.show {
-    display: flex;
+.modal-bg.show{
+  display:flex;
 }
 
-.modal {
-    width: 100%;
-    max-width: 700px;
-
-    background: #f7f7f9;
-
-    border-radius:
-        28px 28px 0 0;
-
-    padding: 20px;
-
-    padding-bottom:
-        calc(
-            22px +
-            env(safe-area-inset-bottom)
-        );
-
-    box-shadow:
-        0 -10px 35px rgba(0,0,0,.16);
+.modal{
+  width:100%;
+  max-width:700px;
+  background:#f7f7f9;
+  border-radius:28px 28px 0 0;
+  padding:20px;
+  padding-bottom:calc(22px + env(safe-area-inset-bottom));
+  box-shadow:0 -10px 35px rgba(0,0,0,.16);
 }
 
-.modal h2 {
-    margin: 0 0 17px;
-
-    font-size: 22px;
+.modal h2{
+  margin:0 0 17px;
+  font-size:22px;
 }
 
-.field {
-    margin-bottom: 13px;
+.field{
+  margin-bottom:13px;
 }
 
-.field label {
-    display: block;
-
-    font-size: 12px;
-    font-weight: 750;
-
-    color: #777c86;
-
-    margin:
-        0 0 6px 3px;
+.field label{
+  display:block;
+  font-size:12px;
+  font-weight:750;
+  color:#777c86;
+  margin:0 0 6px 3px;
 }
 
 .field input,
 .field select,
-.field textarea {
-    width: 100%;
-
-    border: none;
-
-    background: white;
-
-    border-radius: 14px;
-
-    padding: 13px;
-
-    outline: none;
-
-    font-size: 15px;
-
-    color: #17191d;
+.field textarea{
+  width:100%;
+  border:none;
+  background:white;
+  border-radius:14px;
+  padding:13px;
+  outline:none;
+  font-size:15px;
+  color:#17191d;
 }
 
-.field textarea {
-    min-height: 110px;
-
-    resize: vertical;
+.field textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
-.modal-actions {
-    display: flex;
-
-    gap: 9px;
-
-    margin-top: 5px;
+.modal-actions{
+  display:flex;
+  gap:9px;
+  margin-top:5px;
 }
 
-.modal-actions button {
-    flex: 1;
-
-    border: none;
-
-    border-radius: 14px;
-
-    padding: 13px;
-
-    font-weight: 750;
+.modal-actions button{
+  flex:1;
+  border:none;
+  border-radius:14px;
+  padding:13px;
+  font-weight:750;
 }
 
-.cancel {
-    background: #e7e8eb;
-    color: #5c616a;
+.cancel{
+  background:#e7e8eb;
+  color:#5c616a;
 }
 
-.save {
-    background: #242932;
-    color: white;
+.save{
+  background:#242932;
+  color:white;
 }
 
-.delete {
-    background: #ececef;
-    color: #9a4d4d;
+.delete{
+  background:#ececef;
+  color:#9a4d4d;
 }
 
-@media (min-width:700px) {
+@media(min-width:700px){
+  .modal-bg{
+    align-items:center;
+    padding:20px;
+  }
 
-    .modal-bg {
-        align-items: center;
-        padding: 20px;
-    }
-
-    .modal {
-        border-radius: 28px;
-        max-width: 520px;
-    }
+  .modal{
+    border-radius:28px;
+    max-width:520px;
+  }
 }
-
 </style>
 </head>
 
 <body>
 
 <header class="header">
+  <div class="header-top">
 
-    <div class="header-top">
-
-        <div>
-
-            <div class="title">
-                СР-426
-            </div>
-
-            <div class="subtitle">
-                Расписание занятий
-            </div>
-
-        </div>
-
-        <button
-            class="info-button"
-            onclick="openSection('about')">
-            ⓘ
-        </button>
-
+    <div>
+      <div class="title">СР-426</div>
+      <div class="subtitle">Расписание занятий</div>
     </div>
 
+    <button class="info-button" onclick="openSection('about')">
+      ⓘ
+    </button>
+
+  </div>
 </header>
 
 
 <main class="container">
 
+<section id="today" class="section active">
 
-<!-- ================= СЕГОДНЯ ================= -->
+  <div class="day-header" id="todayTitle"></div>
 
-<section
-    id="today"
-    class="section active">
-
-    <div
-        class="day-header"
-        id="todayTitle">
-    </div>
-
-    <div id="todayLessons"></div>
+  <div id="todayLessons"></div>
 
 </section>
 
 
-<!-- ================= НЕДЕЛЯ ================= -->
+<section id="week" class="section">
 
-<section
-    id="week"
-    class="section">
+  <div class="week-nav">
 
-    <div class="week-nav">
-
-        <button
-            class="week-button"
-            onclick="changeWeek(-1)">
-            ‹
-        </button>
-
-        <div
-            class="week-title"
-            id="weekTitle">
-        </div>
-
-        <button
-            class="week-button"
-            onclick="changeWeek(1)">
-            ›
-        </button>
-
-    </div>
-
-    <div id="weekLessons"></div>
-
-</section>
-
-
-<!-- ================= Д/З ================= -->
-
-<section
-    id="homework"
-    class="section">
-
-    <div class="day-header">
-        Домашние задания
-    </div>
-
-    <button
-        class="add-hw"
-        style="
-            margin-bottom:14px;
-            width:100%;
-            padding:13px
-        "
-        onclick="openHomeworkModal()">
-
-        ＋ Добавить домашнее задание
-
+    <button class="week-button" onclick="changeWeek(-1)">
+      ‹
     </button>
 
-    <div
-        id="homeworkList"
-        class="hw-list">
-    </div>
+    <div class="week-title" id="weekTitle"></div>
+
+    <button class="week-button" onclick="changeWeek(1)">
+      ›
+    </button>
+
+  </div>
+
+  <div id="weekLessons"></div>
 
 </section>
 
 
-<!-- ================= О САЙТЕ ================= -->
+<section id="homework" class="section">
 
-<section
-    id="about"
-    class="section">
+  <div class="day-header">
+    Домашние задания
+  </div>
 
-    <div class="about-card">
+  <button
+    class="add-hw"
+    style="margin-bottom:14px;width:100%;padding:13px"
+    onclick="openHomeworkModal()"
+  >
+    ＋ Добавить домашнее задание
+  </button>
 
-        <h2>
-            СР-426
-        </h2>
+  <div id="homeworkList" class="hw-list"></div>
 
-        <p>
-            Личное расписание группы СР-426.
-        </p>
+</section>
 
-        <p>
-            Расписание, домашние задания
-            и работа без интернета после
-            первого открытия.
-        </p>
 
-        <p>
-            Домашние задания сохраняются
-            на этом устройстве.
-        </p>
+<section id="about" class="section">
 
-    </div>
+  <div class="about-card">
+
+    <h2>СР-426</h2>
+
+    <p>
+      Личное расписание группы СР-426.
+    </p>
+
+    <p>
+      Расписание взято из официального файла расписания группы
+      СР-426 на осенний семестр 2026/2027 учебного года.
+    </p>
+
+    <p>
+      Домашние задания сохраняются только на этом устройстве.
+    </p>
+
+  </div>
 
 </section>
 
 </main>
 
 
-<!-- ================= НИЖНЕЕ МЕНЮ ================= -->
-
 <nav class="bottom-nav">
 
-    <button
-        class="nav-button active"
-        data-section="today"
-        onclick="openSection('today')">
+  <button
+    class="nav-button active"
+    data-section="today"
+    onclick="openSection('today')"
+  >
+    <span class="nav-icon">⌂</span>
+    <span>Сегодня</span>
+  </button>
 
-        <span class="nav-icon">
-            ⌂
-        </span>
+  <button
+    class="nav-button"
+    data-section="week"
+    onclick="openSection('week')"
+  >
+    <span class="nav-icon">▦</span>
+    <span>Неделя</span>
+  </button>
 
-        <span>
-            Сегодня
-        </span>
+  <button
+    class="nav-button"
+    data-section="homework"
+    onclick="openSection('homework')"
+  >
+    <span class="nav-icon">✓</span>
+    <span>Д/З</span>
+  </button>
 
-    </button>
-
-
-    <button
-        class="nav-button"
-        data-section="week"
-        onclick="openSection('week')">
-
-        <span class="nav-icon">
-            ▦
-        </span>
-
-        <span>
-            Неделя
-        </span>
-
-    </button>
-
-
-    <button
-        class="nav-button"
-        data-section="homework"
-        onclick="openSection('homework')">
-
-        <span class="nav-icon">
-            ✓
-        </span>
-
-        <span>
-            Д/З
-        </span>
-
-    </button>
-
-
-    <button
-        class="nav-button"
-        data-section="about"
-        onclick="openSection('about')">
-
-        <span class="nav-icon">
-            ⓘ
-        </span>
-
-        <span>
-            О сайте
-        </span>
-
-    </button>
+  <button
+    class="nav-button"
+    data-section="about"
+    onclick="openSection('about')"
+  >
+    <span class="nav-icon">ⓘ</span>
+    <span>О сайте</span>
+  </button>
 
 </nav>
 
 
-<!-- ================= МОДАЛЬНОЕ ОКНО ================= -->
-
 <div
-    class="modal-bg"
-    id="modalBg"
-    onclick="backgroundClose(event)">
+  class="modal-bg"
+  id="modalBg"
+  onclick="backgroundClose(event)"
+>
 
-    <div class="modal">
+  <div class="modal">
 
-        <h2 id="modalTitle">
-            Добавить Д/З
-        </h2>
+    <h2 id="modalTitle">
+      Добавить Д/З
+    </h2>
 
+    <div class="field">
 
-        <div class="field">
+      <label>Предмет</label>
 
-            <label>
-                Предмет
-            </label>
-
-            <select id="hwSubject"></select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Дата
-            </label>
-
-            <input
-                type="date"
-                id="hwDate">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Домашнее задание
-            </label>
-
-            <textarea
-                id="hwText"
-                placeholder="Напишите домашнее задание...">
-            </textarea>
-
-        </div>
-
-
-        <div class="modal-actions">
-
-            <button
-                class="cancel"
-                onclick="closeHomeworkModal()">
-
-                Отмена
-
-            </button>
-
-            <button
-                class="save"
-                onclick="saveHomework()">
-
-                Сохранить
-
-            </button>
-
-        </div>
-
-
-        <div
-            id="deleteArea"
-            style="display:none;margin-top:9px">
-
-            <button
-                class="delete"
-                style="width:100%"
-                onclick="deleteHomework()">
-
-                Удалить Д/З
-
-            </button>
-
-        </div>
+      <select id="hwSubject"></select>
 
     </div>
+
+
+    <div class="field">
+
+      <label>Дата</label>
+
+      <input type="date" id="hwDate">
+
+    </div>
+
+
+    <div class="field">
+
+      <label>Домашнее задание</label>
+
+      <textarea
+        id="hwText"
+        placeholder="Напишите домашнее задание..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel"
+        onclick="closeHomeworkModal()"
+      >
+        Отмена
+      </button>
+
+      <button
+        class="save"
+        onclick="saveHomework()"
+      >
+        Сохранить
+      </button>
+
+    </div>
+
+
+    <div
+      id="deleteArea"
+      style="display:none;margin-top:9px"
+    >
+
+      <button
+        class="delete"
+        style="width:100%"
+        onclick="deleteHomework()"
+      >
+        Удалить Д/З
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   РАСПИСАНИЕ
-   ===================================================== */
+/* =========================================================
+   РАСПИСАНИЕ СР-426
+   Источник: 1 курс ИСИ 2026 2.xlsx
+   Осенний семестр 2026/2027
+   ========================================================= */
 
 const schedule = {
 
-    1: {
-        name: "Понедельник",
-
-        odd: [
-
-            [
-                "creative",
-                "10:50–12:10",
-                "Технологии презентации рекламного креатива",
-                "Практика",
-                "6411",
-                "Кобозева Д.Л."
-            ],
-
-            [
-                "history",
-                "12:25–13:45",
-                "История России",
-                "Практика",
-                "6401",
-                "Гаврилов А.Ю."
-            ],
-
-            [
-                "marketing",
-                "17:40–19:00",
-                "Основы маркетинга",
-                "Лекция",
-                "Дистанционно",
-                "Андреева А.Л."
-            ]
-
-        ],
-
-        even: []
-    },
-
-
-    2: {
-
-        name: "Вторник",
-
-        odd: [
-
-            [
-                "communication",
-                "09:15–10:35",
-                "Основы теории коммуникации",
-                "Лекция",
-                "Дистанционно",
-                "Королева К.Ю."
-            ],
-
-            [
-                "selfdevelopment",
-                "10:50–12:10",
-                "Технологии самообразования и творческого саморазвития",
-                "Лекция",
-                "Дистанционно",
-                "Хлапотин Ю.Н."
-            ],
-
-            [
-                "foreign",
-                "16:05–17:25",
-                "Иностранный язык",
-                "Практика",
-                "6402",
-                "Преподаватель кафедры"
-            ],
-
-            [
-                "advertising",
-                "17:40–19:00",
-                "Теория и история рекламы и связей с общественностью",
-                "Практика",
-                "1815",
-                "Хрусловский В.А."
-            ]
-
-        ],
-
-        even: [
-
-            [
-                "creative",
-                "09:15–10:35",
-                "Технологии презентации рекламного креатива",
-                "Лекция",
-                "Дистанционно",
-                "Кобозева Д.Л."
-            ],
-
-            [
-                "foreign",
-                "16:05–17:25",
-                "Иностранный язык",
-                "Практика",
-                "6402",
-                "Преподаватель кафедры"
-            ],
-
-            [
-                "advertising",
-                "17:40–19:00",
-                "Теория и история рекламы и связей с общественностью",
-                "Практика",
-                "1815",
-                "Хрусловский В.А."
-            ]
-
-        ]
-    },
-
-
-    3: {
-
-        name: "Среда",
-
-        odd: [
-
-            [
-                "marketing",
-                "12:25–13:45",
-                "Основы маркетинга",
-                "Практика",
-                "6111-1",
-                "Андреева А.Л."
-            ],
-
-            [
-                "communication",
-                "14:25–15:45",
-                "Основы теории коммуникации",
-                "Практика",
-                "3319",
-                "Королева К.Ю."
-            ],
-
-            [
-                "sport",
-                "16:05–17:25",
-                "Элективные дисциплины по физической культуре и спорту",
-                "Практика",
-                "Спорт. зал",
-                "Преподаватель кафедры"
-            ]
-
-        ],
-
-        even: [
-
-            [
-                "selfdevelopment",
-                "10:50–12:10",
-                "Технологии самообразования и творческого саморазвития",
-                "Практика",
-                "6302",
-                "Хлапотин Ю.Н."
-            ],
-
-            [
-                "marketing",
-                "12:25–13:45",
-                "Основы маркетинга",
-                "Практика",
-                "6111-1",
-                "Андреева А.Л."
-            ],
-
-            [
-                "communication",
-                "14:25–15:45",
-                "Основы теории коммуникации",
-                "Практика",
-                "3319",
-                "Королева К.Ю."
-            ],
-
-            [
-                "sport",
-                "16:05–17:25",
-                "Элективные дисциплины по физической культуре и спорту",
-                "Практика",
-                "Спорт. зал",
-                "Преподаватель кафедры"
-            ]
-
-        ]
-    },
-
-
-    4: {
-
-        name: "Четверг",
-
-        odd: [],
-        even: []
-
-    },
-
-
-    5: {
-
-        name: "Пятница",
-
-        odd: [
-
-            [
-                "state",
-                "14:25–15:45",
-                "Основы российской государственности",
-                "Практика",
-                "6401",
-                "Овечкина А.К."
-            ],
-
-            [
-                "professional",
-                "16:05–17:25",
-                "Основы профессионального развития",
-                "Практика",
-                "6304",
-                "Гайтукаева Г.Р."
-            ]
-
-        ],
-
-        even: [
-
-            [
-                "historyAdvertising",
-                "09:15–10:35",
-                "История рекламы и связей с общественностью",
-                "Лекция",
-                "Дистанционно",
-                "Хрусловский В.А."
-            ],
-
-            [
-                "professional",
-                "10:50–12:10",
-                "Основы профессионального развития",
-                "Лекция",
-                "Дистанционно",
-                "Гайтукаева Г.Р."
-            ],
-
-            [
-                "state",
-                "14:25–15:45",
-                "Основы российской государственности",
-                "Практика",
-                "6401",
-                "Овечкина А.К."
-            ],
-
-            [
-                "professional",
-                "16:05–17:25",
-                "Основы профессионального развития",
-                "Практика",
-                "6304",
-                "Гайтукаева Г.Р."
-            ]
-
-        ]
-    },
-
-
-    6: {
-
-        name: "Суббота",
-
-        odd: [
-
-            [
-                "marketing",
-                "12:25–13:45",
-                "Основы маркетинга",
-                "Лекция",
-                "Дистанционно",
-                "Андреева А.Л."
-            ]
-
-        ],
-
-        even: []
-
-    },
-
-
-    0: {
-
-        name: "Воскресенье",
-
-        odd: [],
-        even: []
-
-    }
+  /* ================= ПОНЕДЕЛЬНИК ================= */
+
+  1:{
+    name:"Понедельник",
+
+    odd:[
+      [
+        "creative",
+        "10:50–12:10",
+        "Технологии презентации рекламного креатива",
+        "Практика",
+        "6411",
+        "Кобозева Д.Л."
+      ],
+
+      [
+        "history",
+        "12:25–13:45",
+        "История России",
+        "Практика",
+        "6401",
+        "Гаврилов А.Ю."
+      ],
+
+      [
+        "marketing",
+        "17:40–19:00",
+        "Основы маркетинга",
+        "Лекция",
+        "Дистанционно",
+        "Андреева А.Л."
+      ]
+    ],
+
+    even:[]
+  },
+
+
+  /* ================= ВТОРНИК ================= */
+
+  2:{
+    name:"Вторник",
+
+    odd:[
+      [
+        "communication",
+        "09:15–10:35",
+        "Основы теории коммуникации",
+        "Лекция",
+        "Дистанционно",
+        "Королева К.Ю."
+      ],
+
+      [
+        "selfdevelopment",
+        "10:50–12:10",
+        "Технологии самообразования и творческого саморазвития",
+        "Лекция",
+        "Дистанционно",
+        "Хлапотин Ю.Н."
+      ],
+
+      [
+        "foreign",
+        "16:05–17:25",
+        "Иностранный язык",
+        "Практика",
+        "6402",
+        "Преподаватель кафедры"
+      ],
+
+      [
+        "advertising",
+        "17:40–19:00",
+        "Теория и история рекламы и связей с общественностью",
+        "Практика",
+        "1815",
+        "Хрусловский В.А."
+      ]
+    ],
+
+    even:[
+      [
+        "creative",
+        "09:15–10:35",
+        "Технологии презентации рекламного креатива",
+        "Лекция",
+        "Дистанционно",
+        "Кобозева Д.Л."
+      ],
+
+      [
+        "foreign",
+        "16:05–17:25",
+        "Иностранный язык",
+        "Практика",
+        "6402",
+        "Преподаватель кафедры"
+      ],
+
+      [
+        "advertising",
+        "17:40–19:00",
+        "Теория и история рекламы и связей с общественностью",
+        "Практика",
+        "1815",
+        "Хрусловский В.А."
+      ]
+    ]
+  },
+
+
+  /* ================= СРЕДА ================= */
+
+  3:{
+    name:"Среда",
+
+    odd:[
+      [
+        "marketing",
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Практика",
+        "6111-1",
+        "Андреева А.Л."
+      ],
+
+      [
+        "communication",
+        "14:25–15:45",
+        "Основы теории коммуникации",
+        "Практика",
+        "3319",
+        "Королева К.Ю."
+      ],
+
+      [
+        "sport",
+        "16:05–17:25",
+        "Элективные дисциплины по физической культуре и спорту",
+        "Практика",
+        "Спорт. зал",
+        "Преподаватель кафедры"
+      ]
+    ],
+
+    even:[
+      [
+        "selfdevelopment",
+        "10:50–12:10",
+        "Технологии самообразования и творческого саморазвития",
+        "Практика",
+        "6302",
+        "Хлапотин Ю.Н."
+      ],
+
+      [
+        "marketing",
+        "12:25–13:45",
+        "Основы маркетинга",
+        "Практика",
+        "6111-1",
+        "Андреева А.Л."
+      ],
+
+      [
+        "communication",
+        "14:25–15:45",
+        "Основы теории коммуникации",
+        "Практика",
+        "3319",
+        "Королева К.Ю."
+      ],
+
+      [
+        "sport",
+        "16:05–17:25",
+        "Элективные дисциплины по физической культуре и спорту",
+        "Практика",
+        "Спорт. зал",
+        "Преподаватель кафедры"
+      ]
+    ]
+  },
+
+
+  /* ================= ЧЕТВЕРГ ================= */
+
+  4:{
+    name:"Четверг",
+    odd:[],
+    even:[]
+  },
+
+
+  /* ================= ПЯТНИЦА ================= */
+
+  5:{
+    name:"Пятница",
+
+    odd:[],
+
+    even:[
+      [
+        "historyAdvertising",
+        "09:15–10:35",
+        "История рекламы и связей с общественностью",
+        "Лекция",
+        "Дистанционно",
+        "Хрусловский В.А."
+      ],
+
+      [
+        "professional",
+        "10:50–12:10",
+        "Основы профессионального развития",
+        "Лекция",
+        "Дистанционно",
+        "Гайтукаева Г.Р."
+      ],
+
+      [
+        "state",
+        "14:25–15:45",
+        "Основы российской государственности",
+        "Практика",
+        "6401",
+        "Овечкина А.К."
+      ],
+
+      [
+        "professional",
+        "16:05–17:25",
+        "Основы профессионального развития",
+        "Практика",
+        "6304",
+        "Гайтукаева Г.Р."
+      ]
+    ]
+  },
+
+
+  /* ================= СУББОТА ================= */
+
+  6:{
+    name:"Суббота",
+    odd:[],
+    even:[]
+  }
 
 };
 
 
-/* =====================================================
+/* =========================================================
    НАЗВАНИЯ ПРЕДМЕТОВ
-   ===================================================== */
+   ========================================================= */
 
-const subjectNames = {};
+const subjectNames={
 
-for (const day in schedule) {
+  creative:
+    "Технологии презентации рекламного креатива",
 
-    ["odd", "even"].forEach(type => {
+  history:
+    "История России",
 
-        schedule[day][type].forEach(lesson => {
+  marketing:
+    "Основы маркетинга",
 
-            subjectNames[lesson[0]] =
-                lesson[2];
+  communication:
+    "Основы теории коммуникации",
 
-        });
+  selfdevelopment:
+    "Технологии самообразования и творческого саморазвития",
 
-    });
+  foreign:
+    "Иностранный язык",
 
-}
+  advertising:
+    "Теория и история рекламы и связей с общественностью",
+
+  sport:
+    "Элективные дисциплины по физической культуре и спорту",
+
+  state:
+    "Основы российской государственности",
+
+  professional:
+    "Основы профессионального развития",
+
+  historyAdvertising:
+    "История рекламы и связей с общественностью"
+
+};
 
 
-/* =====================================================
+/* =========================================================
    ДОМАШНИЕ ЗАДАНИЯ
-   ===================================================== */
+   ========================================================= */
 
-let homework = [];
+let homework=[];
 
-let editingHomeworkId = null;
+let editingHomeworkId=null;
+
+let weekOffset=0;
 
 
-function loadHomework() {
+function normalize(value){
 
-    try {
-
-        const saved =
-            localStorage.getItem(
-                "sr426_homework"
-            );
-
-        homework =
-            saved
-                ? JSON.parse(saved)
-                : [];
-
-    } catch {
-
-        homework = [];
-
-    }
-
-    migrateOldHomework();
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g," ");
 
 }
 
 
-function saveHomeworkData() {
+function loadHomework(){
 
-    localStorage.setItem(
-        "sr426_homework",
-        JSON.stringify(homework)
+  try{
+
+    homework=JSON.parse(
+      localStorage.getItem("sr426_homework") || "[]"
     );
 
-}
+  }catch(e){
+
+    homework=[];
+
+  }
 
 
-function normalize(value) {
-
-    return String(value || "")
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, " ");
-
-}
+  let changed=false;
 
 
-function migrateOldHomework() {
+  homework.forEach(item=>{
 
-    let changed = false;
+    if(!item.subjectId){
 
-    homework.forEach(item => {
+      const found=
+        Object.entries(subjectNames)
+        .find(
+          ([id,name])=>
+            normalize(name)===normalize(item.subject)
+        );
 
-        if (!item.subjectId) {
+      if(found){
 
-            const found =
-                Object.entries(subjectNames)
-                .find(([id,name]) =>
-                    normalize(name) ===
-                    normalize(item.subject)
-                );
+        item.subjectId=found[0];
 
-            if (found) {
+        changed=true;
 
-                item.subjectId =
-                    found[0];
-
-                changed = true;
-
-            }
-
-        }
-
-    });
-
-    if (changed) {
-
-        saveHomeworkData();
+      }
 
     }
 
+  });
+
+
+  if(changed){
+
+    saveHomeworkData();
+
+  }
+
 }
 
 
-/* =====================================================
+function saveHomeworkData(){
+
+  localStorage.setItem(
+    "sr426_homework",
+    JSON.stringify(homework)
+  );
+
+}
+
+
+/* =========================================================
    ДАТЫ
-   ===================================================== */
+   ========================================================= */
 
-function toISO(date) {
+function toISO(date){
 
-    const y =
-        date.getFullYear();
-
-    const m =
-        String(
-            date.getMonth() + 1
-        ).padStart(2,"0");
-
-    const d =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
-
-    return `${y}-${m}-${d}`;
+  return `${date.getFullYear()}-${
+    String(date.getMonth()+1).padStart(2,"0")
+  }-${
+    String(date.getDate()).padStart(2,"0")
+  }`;
 
 }
 
 
-function formatDate(date) {
+function formatDate(date){
 
-    return date.toLocaleDateString(
-        "ru-RU",
-        {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-function formatShortDate(date) {
-
-    return date.toLocaleDateString(
-        "ru-RU",
-        {
-            day: "2-digit",
-            month: "2-digit"
-        }
-    );
+  return date.toLocaleDateString(
+    "ru-RU",
+    {
+      day:"2-digit",
+      month:"2-digit",
+      year:"numeric"
+    }
+  );
 
 }
 
 
-/* =====================================================
-   ВАЖНО:
-   ТЕКУЩАЯ НЕДЕЛЯ = ЧЁТНАЯ
-   ===================================================== */
+function formatShortDate(date){
 
-function getMonday(offset = 0) {
-
-    const now = new Date();
-
-    now.setHours(
-        0,0,0,0
-    );
-
-    const day =
-        now.getDay();
-
-    const diff =
-        day === 0
-            ? -6
-            : 1 - day;
-
-    now.setDate(
-        now.getDate()
-        + diff
-        + offset * 7
-    );
-
-    return now;
+  return date.toLocaleDateString(
+    "ru-RU",
+    {
+      day:"2-digit",
+      month:"2-digit"
+    }
+  );
 
 }
 
 
-function getWeekType(date) {
+/* =========================================================
+   ПОНЕДЕЛЬНИК НЕДЕЛИ
+   ========================================================= */
 
-    const currentMonday =
-        getMonday(0);
+function getMonday(offset=0){
 
-    const targetMonday =
-        new Date(date);
+  const now=new Date();
 
-    currentMonday.setHours(
-        0,0,0,0
-    );
+  now.setHours(0,0,0,0);
 
-    targetMonday.setHours(
-        0,0,0,0
-    );
+  const day=now.getDay();
 
-    const diffDays =
-        Math.round(
-            (
-                targetMonday -
-                currentMonday
-            ) / 86400000
-        );
+  const diff=day===0 ? -6 : 1-day;
 
-    const weekDifference =
-        Math.floor(
-            diffDays / 7
-        );
+  now.setDate(
+    now.getDate()+diff+offset*7
+  );
 
-    /*
-       Текущая неделя — EVEN.
-       Следующая — ODD.
-       Предыдущая — ODD.
-    */
+  return now;
 
-    return weekDifference % 2 === 0
+}
+
+
+/* =========================================================
+   ЧЁТНАЯ / НЕЧЁТНАЯ НЕДЕЛЯ
+   ========================================================= */
+
+/*
+  По файлу расписания:
+
+  21.09.2026 – 27.09.2026
+  = ЧЁТНАЯ НЕДЕЛЯ
+
+  Поэтому текущая неделя определяется как even.
+*/
+
+function getWeekType(date){
+
+  const currentMonday=getMonday(0);
+
+  const targetMonday=new Date(date);
+
+  currentMonday.setHours(0,0,0,0);
+
+  targetMonday.setHours(0,0,0,0);
+
+
+  const diffDays=Math.round(
+    (targetMonday-currentMonday)/86400000
+  );
+
+
+  const weekDifference=
+    Math.floor(diffDays/7);
+
+
+  return weekDifference % 2 === 0
     ? "even"
     : "odd";
 
 }
 
 
-/* =====================================================
-   ПОИСК Д/З
-   ===================================================== */
+/* =========================================================
+   ПОИСК ДОМАШНЕГО ЗАДАНИЯ
+   ========================================================= */
 
-function getHomework(
+function getHomework(subjectId,dateISO){
+
+  return homework.filter(item=>{
+
+    if(item.subjectId){
+
+      return (
+        item.subjectId===subjectId &&
+        item.date===dateISO
+      );
+
+    }
+
+    return (
+      item.date===dateISO &&
+      normalize(item.subject)===
+      normalize(subjectNames[subjectId])
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   ЭКРАНИРОВАНИЕ HTML
+   ========================================================= */
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   КАРТОЧКА ЗАНЯТИЯ
+   ========================================================= */
+
+function lessonHTML(lesson,date){
+
+  const [
+    subjectId,
+    time,
+    name,
+    type,
+    room,
+    teacher
+  ]=lesson;
+
+
+  const dateISO=toISO(date);
+
+  const hw=getHomework(
     subjectId,
     dateISO
-) {
+  );
 
-    return homework.filter(item => {
 
-        if (item.subjectId) {
+  let homeworkHTML="";
 
-            return (
-                item.subjectId === subjectId &&
-                item.date === dateISO
-            );
 
-        }
+  if(hw.length){
 
-        return (
-            item.date === dateISO &&
-            normalize(item.subject) ===
-            normalize(subjectNames[subjectId])
-        );
+    homeworkHTML=hw.map(item=>`
+
+      <div class="homework-box">
+
+        <div class="homework-title">
+          Домашнее задание
+        </div>
+
+        <div class="homework-text">
+          ${escapeHTML(item.text)}
+        </div>
+
+        <button
+          class="add-hw"
+          onclick="editHomework('${item.id}')"
+        >
+          Изменить
+        </button>
+
+      </div>
+
+    `).join("");
+
+  }else{
+
+    homeworkHTML=`
+
+      <button
+        class="add-hw"
+        onclick="openHomeworkModal(
+          '${subjectId}',
+          '${dateISO}'
+        )"
+      >
+        ＋ Добавить Д/З
+      </button>
+
+    `;
+
+  }
+
+
+  return `
+
+    <div class="lesson">
+
+      <div class="lesson-time">
+        ${time}
+      </div>
+
+      <div class="lesson-name">
+        ${escapeHTML(name)}
+      </div>
+
+      <div class="lesson-meta">
+
+        <span class="badge">
+          ${escapeHTML(type)}
+        </span>
+
+        <span class="badge">
+          ${escapeHTML(room)}
+        </span>
+
+        <span class="badge">
+          ${escapeHTML(teacher)}
+        </span>
+
+      </div>
+
+      ${homeworkHTML}
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   СЕГОДНЯ
+   ========================================================= */
+
+function renderToday(){
+
+  const date=new Date();
+
+  const day=date.getDay();
+
+  const weekType=getWeekType(date);
+
+  const info=schedule[day];
+
+  const lessons=
+    info
+      ? info[weekType]
+      : [];
+
+
+  document.getElementById(
+    "todayTitle"
+  ).textContent=
+
+    info
+      ? `${info.name} · ${formatDate(date)}`
+      : "";
+
+
+  const container=
+    document.getElementById("todayLessons");
+
+
+  if(!lessons.length){
+
+    container.innerHTML=
+      '<div class="no-lessons">Сегодня занятий нет</div>';
+
+    return;
+
+  }
+
+
+  container.innerHTML=
+    lessons
+      .map(lesson=>lessonHTML(lesson,date))
+      .join("");
+
+}
+
+
+/* =========================================================
+   ПЕРЕКЛЮЧЕНИЕ НЕДЕЛИ
+   ========================================================= */
+
+function changeWeek(direction){
+
+  weekOffset+=direction;
+
+  renderWeek();
+
+}
+
+
+/* =========================================================
+   НЕДЕЛЯ
+   ========================================================= */
+
+function renderWeek(){
+
+  const monday=
+    getMonday(weekOffset);
+
+
+  const sunday=
+    new Date(monday);
+
+  sunday.setDate(
+    monday.getDate()+6
+  );
+
+
+  document.getElementById(
+    "weekTitle"
+  ).textContent=
+
+    `${formatShortDate(monday)} — ${formatShortDate(sunday)}`;
+
+
+  const container=
+    document.getElementById("weekLessons");
+
+
+  let html="";
+
+
+  /*
+    0 = понедельник
+    1 = вторник
+    2 = среда
+    3 = четверг
+    4 = пятница
+    5 = суббота
+  */
+
+  for(let i=0;i<6;i++){
+
+    const date=
+      new Date(monday);
+
+    date.setDate(
+      monday.getDate()+i
+    );
+
+
+    const day=date.getDay();
+
+    const info=schedule[day];
+
+
+    const lessons=
+      info
+        ? info[getWeekType(date)]
+        : [];
+
+
+    html+=`
+
+      <div class="day-header">
+        ${info.name} · ${formatDate(date)}
+      </div>
+
+    `;
+
+
+    if(!lessons.length){
+
+      html+=`
+
+        <div
+          class="no-lessons"
+          style="margin-bottom:15px"
+        >
+          Занятий нет
+        </div>
+
+      `;
+
+    }else{
+
+      html+=lessons
+        .map(
+          lesson=>
+            lessonHTML(lesson,date)
+        )
+        .join("");
+
+    }
+
+  }
+
+
+  container.innerHTML=html;
+
+}
+
+
+/* =========================================================
+   ПЕРЕКЛЮЧЕНИЕ РАЗДЕЛОВ
+   ========================================================= */
+
+function openSection(section){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(
+      el=>el.classList.remove("active")
+    );
+
+
+  document
+    .getElementById(section)
+    .classList.add("active");
+
+
+  document
+    .querySelectorAll(".nav-button")
+    .forEach(button=>{
+
+      button.classList.toggle(
+        "active",
+        button.dataset.section===section
+      );
 
     });
 
+
+  if(section==="today"){
+
+    renderToday();
+
+  }
+
+
+  if(section==="week"){
+
+    renderWeek();
+
+  }
+
+
+  if(section==="homework"){
+
+    renderHomework();
+
+  }
+
 }
 
 
-/* =====================================================
-   HTML УРОКА
-   ===================================================== */
+/* =========================================================
+   ДОМАШНИЕ ЗАДАНИЯ — СПИСОК
+   ========================================================= */
 
-function lessonHTML(
-    lesson,
-    date
-) {
+function renderHomework(){
 
-    const subjectId =
-        lesson[0];
-
-    const time =
-        lesson[1];
-
-    const name =
-        lesson[2];
-
-    const type =
-        lesson[3];
-
-    const room =
-        lesson[4];
-
-    const teacher =
-        lesson[5];
-
-    const dateISO =
-        toISO(date);
-
-    const hw =
-        getHomework(
-            subjectId,
-            dateISO
-        );
+  const container=
+    document.getElementById(
+      "homeworkList"
+    );
 
 
-    let homeworkHTML = "";
+  if(!homework.length){
+
+    container.innerHTML=
+      '<div class="empty">Домашних заданий пока нет</div>';
+
+    return;
+
+  }
 
 
-    if (hw.length > 0) {
-
-        homeworkHTML =
-            hw.map(item => `
-
-                <div class="homework-box">
-
-                    <div class="homework-title">
-                        Домашнее задание
-                    </div>
-
-                    <div class="homework-text">
-                        ${escapeHTML(item.text)}
-                    </div>
-
-                    <button
-                        class="add-hw"
-                        onclick="editHomework('${item.id}')">
-
-                        Изменить
-
-                    </button>
-
-                </div>
-
-            `).join("");
-
-    } else {
-
-        homeworkHTML = `
-
-            <button
-                class="add-hw"
-                onclick="
-                    openHomeworkModal(
-                        '${subjectId}',
-                        '${dateISO}'
-                    )
-                ">
-
-                ＋ Добавить Д/З
-
-            </button>
-
-        `;
-
-    }
+  const sorted=
+    [...homework].sort(
+      (a,b)=>
+        (a.date || "")
+        .localeCompare(b.date || "")
+    );
 
 
-    return `
+  container.innerHTML=
+    sorted.map(item=>`
 
-        <div class="lesson">
+      <div class="hw-item">
 
-            <div class="lesson-time">
-                ${time}
-            </div>
+        <div class="hw-subject">
 
-            <div class="lesson-name">
-                ${escapeHTML(name)}
-            </div>
-
-            <div class="lesson-meta">
-
-                <span class="badge">
-                    ${escapeHTML(type)}
-                </span>
-
-                <span class="badge">
-                    ${escapeHTML(room)}
-                </span>
-
-                <span class="badge">
-                    ${escapeHTML(teacher)}
-                </span>
-
-            </div>
-
-            ${homeworkHTML}
+          ${escapeHTML(
+            item.subject ||
+            subjectNames[item.subjectId] ||
+            "Предмет"
+          )}
 
         </div>
 
-    `;
+        <div class="hw-date">
+
+          ${escapeHTML(
+            formatISOForDisplay(item.date)
+          )}
+
+        </div>
+
+        <div class="hw-text">
+
+          ${escapeHTML(item.text)}
+
+        </div>
+
+        <div class="hw-actions">
+
+          <button
+            class="small-button"
+            onclick="editHomework('${item.id}')"
+          >
+            Изменить
+          </button>
+
+          <button
+            class="small-button"
+            onclick="deleteHomeworkById('${item.id}')"
+          >
+            Удалить
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
 
 }
 
 
-/* =====================================================
-   СЕГОДНЯ
-   ===================================================== */
+function formatISOForDisplay(iso){
 
-function renderToday() {
+  if(!iso) return "";
 
-    const date =
-        new Date();
-
-    const day =
-        date.getDay();
-
-    const weekType =
-        getWeekType(date);
-
-    const lessons =
-        schedule[day][weekType];
+  const parts=iso.split("-");
 
 
-    document
-        .getElementById(
-            "todayTitle"
-        )
-        .textContent =
-        `${schedule[day].name} · ${formatDate(date)}`;
+  return parts.length===3
 
+    ? `${parts[2]}.${parts[1]}.${parts[0]}`
 
-    const container =
-        document.getElementById(
-            "todayLessons"
-        );
-
-
-    if (!lessons.length) {
-
-        container.innerHTML = `
-
-            <div class="no-lessons">
-
-                Сегодня занятий нет
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        lessons
-            .map(
-                lesson =>
-                    lessonHTML(
-                        lesson,
-                        date
-                    )
-            )
-            .join("");
+    : iso;
 
 }
 
 
-/* =====================================================
-   НЕДЕЛЯ
-   ===================================================== */
+/* =========================================================
+   SELECT ПРЕДМЕТОВ
+   ========================================================= */
 
-let weekOffset = 0;
+function fillSubjectSelect(){
 
+  document.getElementById(
+    "hwSubject"
+  ).innerHTML=
 
-function changeWeek(direction) {
-
-    weekOffset += direction;
-
-    renderWeek();
-
-}
-
-
-function renderWeek() {
-
-    const monday =
-        getMonday(
-            weekOffset
-        );
-
-    const sunday =
-        new Date(monday);
-
-    sunday.setDate(
-        monday.getDate() + 6
-    );
-
-
-    document
-        .getElementById(
-            "weekTitle"
-        )
-        .textContent =
-        `${formatShortDate(monday)} — ${formatShortDate(sunday)}`;
-
-
-    const container =
-        document.getElementById(
-            "weekLessons"
-        );
-
-
-    let html = "";
-
-
-    for (
-        let i = 0;
-        i < 6;
-        i++
-    ) {
-
-        const date =
-            new Date(monday);
-
-        date.setDate(
-            monday.getDate() + i
-        );
-
-
-        const day =
-            date.getDay();
-
-        const weekType =
-            getWeekType(date);
-
-        const lessons =
-            schedule[day][weekType];
-
-
-        html += `
-
-            <div class="day-header">
-
-                ${schedule[day].name}
-                ·
-                ${formatDate(date)}
-
-            </div>
-
-        `;
-
-
-        if (!lessons.length) {
-
-            html += `
-
-                <div
-                    class="no-lessons"
-                    style="margin-bottom:15px">
-
-                    Занятий нет
-
-                </div>
-
-            `;
-
-        } else {
-
-            html +=
-                lessons
-                    .map(
-                        lesson =>
-                            lessonHTML(
-                                lesson,
-                                date
-                            )
-                    )
-                    .join("");
-
-        }
-
-    }
-
-
-    container.innerHTML =
-        html;
+    Object.keys(subjectNames)
+      .map(
+        id=>
+          `<option value="${id}">
+            ${escapeHTML(subjectNames[id])}
+          </option>`
+      )
+      .join("");
 
 }
 
 
-/* =====================================================
-   ПЕРЕКЛЮЧЕНИЕ РАЗДЕЛОВ
-   ===================================================== */
-
-function openSection(section) {
-
-    document
-        .querySelectorAll(
-            ".section"
-        )
-        .forEach(el =>
-            el.classList.remove(
-                "active"
-            )
-        );
-
-
-    document
-        .getElementById(section)
-        .classList.add(
-            "active"
-        );
-
-
-    document
-        .querySelectorAll(
-            ".nav-button"
-        )
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.section ===
-                section
-            );
-
-        });
-
-
-    if (section === "today")
-        renderToday();
-
-    if (section === "week")
-        renderWeek();
-
-    if (section === "homework")
-        renderHomework();
-
-}
-
-
-/* =====================================================
-   СПИСОК Д/З
-   ===================================================== */
-
-function renderHomework() {
-
-    const container =
-        document.getElementById(
-            "homeworkList"
-        );
-
-
-    if (!homework.length) {
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                Домашних заданий пока нет
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const sorted =
-        [...homework].sort(
-            (a,b) => {
-
-                if (
-                    a.date !==
-                    b.date
-                )
-                    return a.date
-                        .localeCompare(
-                            b.date
-                        );
-
-
-                return normalize(
-                    a.subject
-                ).localeCompare(
-                    normalize(
-                        b.subject
-                    ),
-                    "ru"
-                );
-
-            }
-        );
-
-
-    container.innerHTML =
-        sorted.map(item => `
-
-            <div class="hw-item">
-
-                <div class="hw-subject">
-
-                    ${escapeHTML(
-                        item.subject ||
-                        subjectNames[
-                            item.subjectId
-                        ] ||
-                        "Предмет"
-                    )}
-
-                </div>
-
-                <div class="hw-date">
-
-                    ${formatISOForDisplay(
-                        item.date
-                    )}
-
-                </div>
-
-                <div class="hw-text">
-
-                    ${escapeHTML(
-                        item.text
-                    )}
-
-                </div>
-
-                <div class="hw-actions">
-
-                    <button
-                        class="small-button"
-                        onclick="
-                            editHomework(
-                                '${item.id}'
-                            )
-                        ">
-
-                        Изменить
-
-                    </button>
-
-                    <button
-                        class="small-button"
-                        onclick="
-                            deleteHomeworkById(
-                                '${item.id}'
-                            )
-                        ">
-
-                        Удалить
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function formatISOForDisplay(iso) {
-
-    if (!iso)
-        return "";
-
-    const parts =
-        iso.split("-");
-
-    if (parts.length !== 3)
-        return iso;
-
-    return `
-        ${parts[2]}.
-        ${parts[1]}.
-        ${parts[0]}
-    `;
-
-}
-
-
-/* =====================================================
-   МОДАЛЬНОЕ ОКНО
-   ===================================================== */
-
-function fillSubjectSelect() {
-
-    const select =
-        document.getElementById(
-            "hwSubject"
-        );
-
-
-    select.innerHTML =
-        Object.keys(subjectNames)
-            .map(id => `
-
-                <option value="${id}">
-
-                    ${escapeHTML(
-                        subjectNames[id]
-                    )}
-
-                </option>
-
-            `)
-            .join("");
-
-}
-
+/* =========================================================
+   ДОБАВЛЕНИЕ Д/З
+   ========================================================= */
 
 function openHomeworkModal(
-    subjectId = null,
-    dateISO = null
-) {
+  subjectId=null,
+  dateISO=null
+){
 
-    editingHomeworkId =
-        null;
-
-
-    document
-        .getElementById(
-            "modalTitle"
-        )
-        .textContent =
-        "Добавить Д/З";
+  editingHomeworkId=null;
 
 
-    document
-        .getElementById(
-            "deleteArea"
-        )
-        .style.display =
-        "none";
+  document.getElementById(
+    "modalTitle"
+  ).textContent=
+    "Добавить Д/З";
 
 
-    fillSubjectSelect();
+  document.getElementById(
+    "deleteArea"
+  ).style.display="none";
 
 
-    const select =
-        document.getElementById(
-            "hwSubject"
-        );
+  fillSubjectSelect();
 
 
-    if (
-        subjectId &&
-        subjectNames[subjectId]
-    ) {
+  if(
+    subjectId &&
+    subjectNames[subjectId]
+  ){
 
-        select.value =
-            subjectId;
+    document.getElementById(
+      "hwSubject"
+    ).value=subjectId;
 
-    }
-
-
-    document
-        .getElementById(
-            "hwDate"
-        )
-        .value =
-        dateISO ||
-        toISO(
-            new Date()
-        );
+  }
 
 
-    document
-        .getElementById(
-            "hwText"
-        )
-        .value =
-        "";
+  document.getElementById(
+    "hwDate"
+  ).value=
+    dateISO ||
+    toISO(new Date());
 
 
-    document
-        .getElementById(
-            "modalBg"
-        )
-        .classList.add(
-            "show"
-        );
+  document.getElementById(
+    "hwText"
+  ).value="";
+
+
+  document.getElementById(
+    "modalBg"
+  ).classList.add("show");
 
 }
 
 
-function closeHomeworkModal() {
+/* =========================================================
+   ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА
+   ========================================================= */
 
-    document
-        .getElementById(
-            "modalBg"
-        )
-        .classList.remove(
-            "show"
-        );
+function closeHomeworkModal(){
 
-    editingHomeworkId =
-        null;
-
-}
+  document.getElementById(
+    "modalBg"
+  ).classList.remove("show");
 
 
-function backgroundClose(event) {
-
-    if (
-        event.target.id ===
-        "modalBg"
-    ) {
-
-        closeHomeworkModal();
-
-    }
+  editingHomeworkId=null;
 
 }
 
 
-/* =====================================================
+function backgroundClose(event){
+
+  if(
+    event.target.id==="modalBg"
+  ){
+
+    closeHomeworkModal();
+
+  }
+
+}
+
+
+/* =========================================================
    СОХРАНЕНИЕ Д/З
-   ===================================================== */
+   ========================================================= */
 
-function saveHomework() {
+function saveHomework(){
 
-    const subjectId =
-        document.getElementById(
-            "hwSubject"
-        ).value;
+  const subjectId=
+    document.getElementById(
+      "hwSubject"
+    ).value;
 
-    const date =
-        document.getElementById(
-            "hwDate"
-        ).value;
 
-    const text =
-        document.getElementById(
-            "hwText"
-        ).value.trim();
+  const date=
+    document.getElementById(
+      "hwDate"
+    ).value;
 
 
-    if (!subjectId) {
+  const text=
+    document.getElementById(
+      "hwText"
+    ).value.trim();
 
-        alert(
-            "Выберите предмет."
-        );
 
-        return;
+  if(
+    !subjectId ||
+    !date ||
+    !text
+  ){
 
-    }
-
-
-    if (!date) {
-
-        alert(
-            "Выберите дату."
-        );
-
-        return;
-
-    }
-
-
-    if (!text) {
-
-        alert(
-            "Введите домашнее задание."
-        );
-
-        return;
-
-    }
-
-
-    const subject =
-        subjectNames[
-            subjectId
-        ];
-
-
-    if (editingHomeworkId) {
-
-        const item =
-            homework.find(
-                x =>
-                    x.id ===
-                    editingHomeworkId
-            );
-
-
-        if (item) {
-
-            item.subjectId =
-                subjectId;
-
-            item.subject =
-                subject;
-
-            item.date =
-                date;
-
-            item.text =
-                text;
-
-        }
-
-    } else {
-
-        homework.push({
-
-            id:
-                Date.now()
-                .toString()
-                +
-                Math.random()
-                    .toString(16)
-                    .slice(2),
-
-            subjectId:
-                subjectId,
-
-            subject:
-                subject,
-
-            date:
-                date,
-
-            text:
-                text
-
-        });
-
-    }
-
-
-    saveHomeworkData();
-
-    closeHomeworkModal();
-
-    renderToday();
-
-    renderWeek();
-
-    renderHomework();
-
-}
-
-
-/* =====================================================
-   РЕДАКТИРОВАНИЕ
-   ===================================================== */
-
-function editHomework(id) {
-
-    const item =
-        homework.find(
-            x =>
-                x.id === id
-        );
-
-
-    if (!item)
-        return;
-
-
-    editingHomeworkId =
-        id;
-
-
-    fillSubjectSelect();
-
-
-    document
-        .getElementById(
-            "modalTitle"
-        )
-        .textContent =
-        "Изменить Д/З";
-
-
-    document
-        .getElementById(
-            "hwSubject"
-        )
-        .value =
-        item.subjectId || "";
-
-
-    document
-        .getElementById(
-            "hwDate"
-        )
-        .value =
-        item.date || "";
-
-
-    document
-        .getElementById(
-            "hwText"
-        )
-        .value =
-        item.text || "";
-
-
-    document
-        .getElementById(
-            "deleteArea"
-        )
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById(
-            "modalBg"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-/* =====================================================
-   УДАЛЕНИЕ
-   ===================================================== */
-
-function deleteHomework() {
-
-    if (!editingHomeworkId)
-        return;
-
-    deleteHomeworkById(
-        editingHomeworkId
+    alert(
+      "Заполните предмет, дату и домашнее задание."
     );
 
-    closeHomeworkModal();
+    return;
+
+  }
+
+
+  const subject=
+    subjectNames[subjectId];
+
+
+  if(editingHomeworkId){
+
+    const item=
+      homework.find(
+        x=>x.id===editingHomeworkId
+      );
+
+
+    if(item){
+
+      item.subjectId=subjectId;
+
+      item.subject=subject;
+
+      item.date=date;
+
+      item.text=text;
+
+    }
+
+  }else{
+
+    homework.push({
+
+      id:
+        Date.now().toString()+
+        Math.random()
+          .toString(16)
+          .slice(2),
+
+      subjectId,
+
+      subject,
+
+      date,
+
+      text
+
+    });
+
+  }
+
+
+  saveHomeworkData();
+
+  closeHomeworkModal();
+
+  renderToday();
+
+  renderWeek();
+
+  renderHomework();
 
 }
 
 
-function deleteHomeworkById(id) {
+/* =========================================================
+   РЕДАКТИРОВАНИЕ Д/З
+   ========================================================= */
 
-    homework =
-        homework.filter(
-            item =>
-                item.id !== id
-        );
+function editHomework(id){
 
-
-    saveHomeworkData();
-
-    renderToday();
-
-    renderWeek();
-
-    renderHomework();
-
-}
-
-
-/* =====================================================
-   ЗАЩИТА HTML
-   ===================================================== */
-
-function escapeHTML(value) {
-
-    return String(value || "")
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   PWA / OFFLINE
-   ===================================================== */
-
-if (
-    "serviceWorker" in
-    navigator
-) {
-
-    window.addEventListener(
-        "load",
-        () => {
-
-            navigator
-                .serviceWorker
-                .register(
-                    "./sw.js"
-                )
-                .catch(
-                    () => {}
-                );
-
-        }
+  const item=
+    homework.find(
+      x=>x.id===id
     );
 
+
+  if(!item) return;
+
+
+  editingHomeworkId=id;
+
+
+  fillSubjectSelect();
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent=
+    "Изменить Д/З";
+
+
+  document.getElementById(
+    "hwSubject"
+  ).value=
+    item.subjectId || "";
+
+
+  document.getElementById(
+    "hwDate"
+  ).value=
+    item.date || "";
+
+
+  document.getElementById(
+    "hwText"
+  ).value=
+    item.text || "";
+
+
+  document.getElementById(
+    "deleteArea"
+  ).style.display="block";
+
+
+  document.getElementById(
+    "modalBg"
+  ).classList.add("show");
+
 }
 
 
-/* =====================================================
+/* =========================================================
+   УДАЛЕНИЕ Д/З
+   ========================================================= */
+
+function deleteHomework(){
+
+  if(!editingHomeworkId) return;
+
+  deleteHomeworkById(
+    editingHomeworkId
+  );
+
+  closeHomeworkModal();
+
+}
+
+
+function deleteHomeworkById(id){
+
+  homework=
+    homework.filter(
+      item=>item.id!==id
+    );
+
+
+  saveHomeworkData();
+
+  renderToday();
+
+  renderWeek();
+
+  renderHomework();
+
+}
+
+
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
+
+if("serviceWorker" in navigator){
+
+  window.addEventListener(
+    "load",
+    ()=>
+      navigator.serviceWorker
+        .register("./sw.js")
+        .catch(()=>{})
+  );
+
+}
+
+
+/* =========================================================
    ЗАПУСК
-   ===================================================== */
+   ========================================================= */
 
 loadHomework();
 
